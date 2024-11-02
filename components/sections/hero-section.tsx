@@ -1,7 +1,10 @@
 "use client"
 
-import { ContactForm } from "@/components/forms/contact-form"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import { ContactForm } from "@/components/forms/contact-form"
+import { Phone } from "lucide-react"
 
 export function HeroSection() {
   return (
@@ -24,8 +27,21 @@ export function HeroSection() {
               Geniet van optimaal klimaatcomfort het hele jaar door. 
               Vakkundige installatie met 5 jaar garantie.
             </p>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Link href="/offerte">
+                <Button size="lg" className="bg-green-600 hover:bg-green-700">
+                  Offerte Aanvragen
+                </Button>
+              </Link>
+              <Link href="tel:0462021430">
+                <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20">
+                  <Phone className="mr-2 h-5 w-5" />
+                  Bel 046 202 1430
+                </Button>
+              </Link>
+            </div>
             <div 
-              className="mt-8 flex items-center gap-4 text-sm"
+              className="mt-8 flex flex-wrap items-center gap-4 text-sm"
               role="list"
               aria-label="Voordelen"
             >
