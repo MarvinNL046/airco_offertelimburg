@@ -1,0 +1,21 @@
+/** @type {import('next-sitemap').IConfig} */
+module.exports = {
+  siteUrl: 'https://aircooffertelimburg.nl',
+  generateRobotsTxt: true,
+  robotsTxtOptions: {
+    policies: [
+      {
+        userAgent: '*',
+        allow: '/',
+      },
+    ],
+    additionalSitemaps: [
+      'https://aircooffertelimburg.nl/sitemap-locations.xml',
+      'https://aircooffertelimburg.nl/sitemap-services.xml',
+    ],
+  },
+  exclude: ['/404', '/500', '/offline'],
+  generateIndexSitemap: true,
+  priority: 0.7,
+  changefreq: 'weekly',
+}
