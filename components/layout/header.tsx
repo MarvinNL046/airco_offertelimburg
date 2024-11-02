@@ -64,7 +64,7 @@ export function Header() {
 
         {/* Mobile Navigation */}
         <div className="flex items-center gap-4 lg:hidden">
-          <Link href="tel:+31612345678">
+          <Link href="tel:0462021430">
             <Button size="icon" variant="ghost">
               <Phone className="h-5 w-5" />
               <span className="sr-only">Bel ons</span>

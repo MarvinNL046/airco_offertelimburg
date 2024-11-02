@@ -44,9 +44,9 @@ export function CTASection() {
                     </Link>
                   </Button>
                   <Button size="lg" variant="outline" className="w-full" asChild>
-                    <Link href="tel:+31612345678">
+                    <Link href="tel:0462021430">
                       <Phone className="mr-2 h-4 w-4" />
-                      Bel 06-12345678
+                      Bel 0462021430
                     </Link>
                   </Button>
                   <p className="mt-2 text-center text-sm text-muted-foreground">
