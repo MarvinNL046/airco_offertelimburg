@@ -10,7 +10,7 @@ export async function POST(request: Request) {
     // Rate limiting
     const ip = request.headers.get("x-forwarded-for") || "127.0.0.1"
     const rateLimitResult = await rateLimit(ip)
-    
+
     if (!rateLimitResult.success) {
       return NextResponse.json(
         { error: rateLimitResult.message },
@@ -30,9 +30,11 @@ export async function POST(request: Request) {
       )
     }
 
+    // Parse and sanitize form data
     const formData = await request.json()
     const { name, email, phone, message, subject, city } = sanitizeFormData(formData)
 
+    // Validate email and phone
     if (!validateEmail(email as string)) {
       return NextResponse.json(
         { error: "Ongeldig e-mailadres" },
