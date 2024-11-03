@@ -5,13 +5,14 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Send } from 'lucide-react';
+import { sendEmail } from '@/lib/emailjs';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
-    naam: '',
+    name: '',
     email: '',
-    telefoon: '',
-    bericht: '',
+    phone: '',
+    message: '',
   });
 
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
@@ -30,18 +31,9 @@ export default function ContactForm() {
     setStatus('sending');
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setStatus('success');
-        setFormData({ naam: '', email: '', telefoon: '', bericht: '' });
-      } else {
-        setStatus('error');
-      }
+      await sendEmail(formData);
+      setStatus('success');
+      setFormData({ name: '', email: '', phone: '', message: '' });
     } catch (error) {
       console.error('Error:', error);
       setStatus('error');
@@ -53,9 +45,9 @@ export default function ContactForm() {
       <div className="space-y-4">
         <div>
           <Input
-            name="naam"
+            name="name"
             placeholder="Uw naam"
-            value={formData.naam}
+            value={formData.name}
             onChange={handleChange}
             required
             className="w-full"
@@ -75,9 +67,9 @@ export default function ContactForm() {
         <div>
           <Input
             type="tel"
-            name="telefoon"
+            name="phone"
             placeholder="Uw telefoonnummer"
-            value={formData.telefoon}
+            value={formData.phone}
             onChange={handleChange}
             required
             className="w-full"
@@ -85,9 +77,9 @@ export default function ContactForm() {
         </div>
         <div>
           <Textarea
-            name="bericht"
+            name="message"
             placeholder="Uw bericht"
-            value={formData.bericht}
+            value={formData.message}
             onChange={handleChange}
             required
             className="w-full min-h-[150px]"

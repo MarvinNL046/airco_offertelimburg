@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "sonner"
 import { Loader2 } from "lucide-react"
+import { sendEmail } from "@/lib/emailjs"
 
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -21,18 +22,7 @@ export function ContactForm() {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
-
-      if (!response.ok) {
-        throw new Error("Er ging iets mis")
-      }
-
+      await sendEmail(formData)
       toast.success("Uw aanvraag is succesvol verzonden!")
       setFormData({
         name: "",
