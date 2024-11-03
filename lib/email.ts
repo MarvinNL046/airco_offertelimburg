@@ -1,0 +1,1 @@
+// This file is deprecated - using lib/mailgun.ts instead

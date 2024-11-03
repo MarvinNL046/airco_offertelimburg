@@ -1,0 +1,54 @@
+{
+  "articles": [
+    {
+      "slug": "klimaatbeheersing",
+      "title": "Alles over Klimaatbeheersing",
+      "description": "Een complete gids over moderne klimaatbeheersing voor uw woning of bedrijf",
+      "content": "Klimaatbeheersing is essentieel voor een comfortabele leef- en werkomgeving. In dit artikel bespreken we alle aspecten van moderne klimaatbeheersing systemen.",
+      "category": "Techniek",
+      "tags": ["klimaat", "comfort", "technologie"]
+    },
+    {
+      "slug": "voorbereiding-voor-installatie",
+      "title": "Voorbereiding voor Airco Installatie",
+      "description": "Alles wat u moet weten voordat u een airco laat installeren",
+      "content": "Een goede voorbereiding is essentieel voor een succesvolle airco installatie. In dit artikel bespreken we alle belangrijke aspecten waar u rekening mee moet houden voordat u een airconditioning laat installeren.",
+      "category": "Installatie",
+      "tags": ["installatie", "voorbereiding", "planning"]
+    },
+    {
+      "slug": "onderhoud-tips",
+      "title": "Onderhoudstips voor uw Airconditioning",
+      "description": "Praktische tips voor het onderhoud van uw airco",
+      "content": "Regelmatig onderhoud is cruciaal voor de levensduur en efficiëntie van uw airconditioning. Ontdek hier de belangrijkste onderhoudstips.",
+      "category": "Onderhoud",
+      "tags": ["onderhoud", "tips", "efficiency"]
+    },
+    {
+      "slug": "energiebesparing",
+      "title": "Energiebesparende Tips",
+      "description": "Maximaal comfort met minimaal energieverbruik",
+      "content": "Leer hoe u uw airconditioning zo efficiënt mogelijk kunt gebruiken en bespaar op uw energierekening zonder in te leveren op comfort.",
+      "category": "Energie",
+      "tags": ["energie", "besparing", "duurzaamheid"]
+    }
+  ],
+  "categories": [
+    {
+      "name": "Techniek",
+      "description": "Technische informatie en uitleg"
+    },
+    {
+      "name": "Installatie",
+      "description": "Alles over het installeren van airconditioners"
+    },
+    {
+      "name": "Onderhoud",
+      "description": "Tips en advies voor onderhoud"
+    },
+    {
+      "name": "Energie",
+      "description": "Energiebesparing en duurzaamheid"
+    }
+  ]
+}

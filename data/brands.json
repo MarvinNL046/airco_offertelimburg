@@ -1,0 +1,37 @@
+{
+  "brands": [
+    {
+      "name": "Daikin",
+      "slug": "daikin",
+      "description": "Daikin staat bekend om zijn innovatieve technologie en hoge kwaliteit airconditioners.",
+      "features": [
+        "Zeer energiezuinig met hoge SEER-waarden",
+        "Geavanceerde luchtfiltering",
+        "Fluisterstille werking",
+        "Smart control via app"
+      ]
+    },
+    {
+      "name": "Mitsubishi Electric",
+      "slug": "mitsubishi-electric",
+      "description": "Mitsubishi Electric is synoniem met betrouwbaarheid en duurzaamheid.",
+      "features": [
+        "Plasma Quad Plus filtersysteem",
+        "Hyper Heating technologie",
+        "MELCloud connectiviteit",
+        "3D i-see sensor"
+      ]
+    },
+    {
+      "name": "Samsung",
+      "slug": "samsung",
+      "description": "Samsung combineert stijlvol design met slimme technologie.",
+      "features": [
+        "WindFree technologie",
+        "AI Auto Comfort",
+        "Triple Protector Plus",
+        "SmartThings integratie"
+      ]
+    }
+  ]
+}
