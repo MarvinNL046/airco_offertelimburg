@@ -1,10 +1,11 @@
-import sgMail from '@sendgrid/mail';
+import formData from 'form-data';
+import Mailgun from 'mailgun.js';
 
-if (!process.env.SENDGRID_API_KEY) {
-  throw new Error('SENDGRID_API_KEY is not set in environment variables');
-}
-
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const mailgun = new Mailgun(formData);
+const mg = mailgun.client({
+  username: 'api',
+  key: process.env.MAILGUN_API_KEY as string, // Zorg dat deze variabele is ingesteld in je .env bestand
+});
 
 interface EmailData {
   name: string;
@@ -16,17 +17,13 @@ interface EmailData {
 }
 
 export async function sendNotificationEmail(data: EmailData) {
-  const { name, email, phone, message, city } = data;
+  const { name, email, phone, message, subject, city } = data;
   
   const locationInfo = city ? ` uit ${city}` : '';
   
-  return sgMail.send({
+  const emailData = {
+    from: 'noreply@aircooffertelimburg.nl', // Zorg ervoor dat dit je geverifieerde Mailgun-adres is
     to: 'info@staycoolairco.nl',
-    from: {
-      email: 'noreply@aircooffertelimburg.nl',
-      name: 'Airco Offerte Limburg'
-    },
-    replyTo: email,
     subject: `Nieuwe Lead${locationInfo} - Airco Offerte Limburg`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -44,23 +41,17 @@ export async function sendNotificationEmail(data: EmailData) {
         </div>
       </div>
     `,
-    trackingSettings: {
-      clickTracking: { enable: false },
-      openTracking: { enable: true },
-      subscriptionTracking: { enable: false }
-    }
-  });
+  };
+
+  return mg.messages.create(process.env.MAILGUN_DOMAIN as string, emailData);
 }
 
 export async function sendConfirmationEmail(data: EmailData) {
   const { name, email } = data;
 
-  return sgMail.send({
+  const emailData = {
+    from: 'noreply@aircooffertelimburg.nl', // Zorg ervoor dat dit je geverifieerde Mailgun-adres is
     to: email,
-    from: {
-      email: 'noreply@aircooffertelimburg.nl',
-      name: 'Airco Offerte Limburg'
-    },
     subject: 'Bedankt voor uw aanvraag - Airco Offerte Limburg',
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -82,10 +73,7 @@ export async function sendConfirmationEmail(data: EmailData) {
         </div>
       </div>
     `,
-    trackingSettings: {
-      clickTracking: { enable: false },
-      openTracking: { enable: true },
-      subscriptionTracking: { enable: false }
-    }
-  });
+  };
+
+  return mg.messages.create(process.env.MAILGUN_DOMAIN as string, emailData);
 }
