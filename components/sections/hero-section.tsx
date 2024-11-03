@@ -64,7 +64,7 @@ export function HeroSection() {
             <Card className="p-6 bg-white/95 backdrop-blur">
               <div className="text-center mb-6">
                 <p className="text-sm text-gray-600">Vanaf</p>
-                <p className="text-4xl font-bold text-blue-600">€999,-</p>
+                <p className="text-4xl font-bold text-blue-600">€1299,-</p>
                 <p className="text-sm text-gray-600">Complete installatie</p>
               </div>
               <ContactForm />
