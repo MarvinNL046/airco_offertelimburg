@@ -1,26 +1,30 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
+import Script from "next/script"
+import { Breadcrumb } from "@/components/navigation/breadcrumb"
+import { CTAWithForm } from "@/components/sections/cta-with-form"
 import diensten from "@/data/diensten.json"
 import citiesData from "@/data/steden.json"
+import { generateServiceSchema, generateLocalBusinessSchema, generateBreadcrumbSchema } from "@/lib/schema"
 
-type Props = {
+interface Props {
   params: {
-    dienstSlug: string
-    stadSlug: string
+    slug: string
+    city: string
   }
 }
 
 export function generateStaticParams() {
   const allCities = citiesData.limburg.reduce((acc: string[], municipality) => {
-    return [...acc, ...municipality.places]
+    return [...acc, ...municipality.places.map(place => place.toLowerCase())]
   }, [])
 
   const paths = []
   for (const dienst of diensten) {
     for (const city of allCities) {
       paths.push({
-        dienstSlug: dienst.slug,
-        stadSlug: city.toLowerCase(),
+        slug: dienst.slug,
+        city: city.toLowerCase(),
       })
     }
   }
@@ -28,15 +32,13 @@ export function generateStaticParams() {
 }
 
 export function generateMetadata({ params }: Props): Metadata {
-  const dienst = diensten.find((d) => d.slug === params.dienstSlug)
-  const city = params.stadSlug
+  const dienst = diensten.find((d) => d.slug === params.slug)
+  const cityName = params.city.charAt(0).toUpperCase() + params.city.slice(1)
+  
+  if (!dienst) return {}
 
-  if (!dienst) {
-    return {}
-  }
-
-  const title = `${dienst.title} in ${city} | Airco Offerte Limburg`
-  const description = `Professionele ${dienst.title.toLowerCase()} in ${city}. ✓ Erkend ✓ Gecertificeerd ✓ Vakkundig. Vraag nu een vrijblijvende offerte aan!`
+  const title = `${dienst.title} in ${cityName} | Airco Offerte Limburg`
+  const description = `Professionele ${dienst.title.toLowerCase()} in ${cityName}. ✓ Erkend ✓ Gecertificeerd ✓ Vakkundig. ${dienst.description}`
 
   return {
     title,
@@ -44,37 +46,122 @@ export function generateMetadata({ params }: Props): Metadata {
     openGraph: {
       title,
       description,
+      url: `https://aircooffertelimburg.nl/diensten/${params.slug}/${params.city}`,
+      siteName: "Airco Offerte Limburg",
+      locale: "nl_NL",
+      type: "website",
     },
+    alternates: {
+      canonical: `https://aircooffertelimburg.nl/diensten/${params.slug}/${params.city}`,
+    },
+    keywords: [
+      `${dienst.title} ${cityName}`,
+      `airco ${cityName}`,
+      `airconditioning ${cityName}`,
+      "airco installatie",
+      "airco onderhoud",
+      "klimaatbeheersing",
+      params.city,
+      "Limburg",
+    ],
   }
 }
 
 export default function DienstStadPage({ params }: Props) {
-  const dienst = diensten.find((d) => d.slug === params.dienstSlug)
-  const city = params.stadSlug
+  const dienst = diensten.find((d) => d.slug === params.slug)
+  const cityName = params.city.charAt(0).toUpperCase() + params.city.slice(1)
 
   if (!dienst) {
     notFound()
   }
 
+  const serviceSchema = generateServiceSchema({
+    name: `${dienst.title} in ${cityName}`,
+    description: dienst.description,
+    price: dienst.price,
+  })
+
+  const localBusinessSchema = generateLocalBusinessSchema(cityName)
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", item: "/" },
+    { name: "Diensten", item: "/diensten" },
+    { name: dienst.title, item: `/diensten/${params.slug}` },
+    { name: cityName, item: `/diensten/${params.slug}/${params.city}` },
+  ])
+
+  const breadcrumbItems = [
+    { label: "Diensten", href: "/diensten" },
+    { label: dienst.title, href: `/diensten/${params.slug}` },
+    { label: cityName, href: `/diensten/${params.slug}/${params.city}` },
+  ]
+
   return (
-    <div className="container py-12">
-      <h1 className="mb-8 text-4xl font-bold tracking-tight">
-        {dienst.title} in {city}
-      </h1>
-      <div className="prose prose-lg max-w-none">
-        <p className="lead">
-          Op zoek naar professionele {dienst.title.toLowerCase()} in {city}? 
-          Wij zijn uw betrouwbare partner voor alle airconditioning diensten in de regio {city}.
-        </p>
-        <h2>Onze {dienst.title} Diensten in {city}</h2>
-        <p>{dienst.description}</p>
-        <h2>Waarom Kiezen voor Onze {dienst.title} in {city}?</h2>
-        <ul>
-          {dienst.benefits.map((benefit, index) => (
-            <li key={index}>{benefit}</li>
-          ))}
-        </ul>
+    <>
+      <Script
+        id="service-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <Script
+        id="local-business-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
+      <div className="container mx-auto px-4 py-8">
+        <Breadcrumb items={breadcrumbItems} />
+        
+        <h1 className="text-4xl font-bold mb-6">
+          {dienst.title} in {cityName}
+        </h1>
+        
+        <div className="prose max-w-none mb-16">
+          <p className="text-lg mb-4">
+            Op zoek naar professionele {dienst.title.toLowerCase()} in {cityName}? 
+            Wij zijn uw betrouwbare partner voor alle airconditioning diensten in de regio {cityName}.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4">
+            Onze {dienst.title} Diensten in {cityName}
+          </h2>
+          <p>{dienst.description}</p>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4">
+            Waarom Kiezen voor Onze {dienst.title} in {cityName}?
+          </h2>
+          <ul className="space-y-2">
+            {dienst.benefits.map((benefit, index) => (
+              <li key={index} className="flex items-center gap-2">
+                <span className="text-blue-600">✓</span>
+                {benefit}
+              </li>
+            ))}
+          </ul>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4">
+            Kenmerken van Onze Service
+          </h2>
+          <ul className="space-y-2">
+            {dienst.features.map((feature, index) => (
+              <li key={index} className="flex items-center gap-2">
+                <span className="text-blue-600">✓</span>
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <CTAWithForm 
+          title={`${dienst.title} Nodig in ${cityName}?`}
+          description="Vraag direct een vrijblijvende offerte aan voor deze dienst."
+        />
       </div>
-    </div>
+    </>
   )
 }
