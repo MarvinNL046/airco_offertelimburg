@@ -32,6 +32,39 @@
         "Triple Protector Plus",
         "SmartThings integratie"
       ]
+    },
+    {
+      "name": "LG",
+      "slug": "lg",
+      "description": "LG biedt innovatieve airconditioners met geavanceerde technologieën voor optimaal comfort.",
+      "features": [
+        "Dual Inverter Compressor",
+        "ThinQ smart control",
+        "UVnano technologie",
+        "Active Energy Control"
+      ]
+    },
+    {
+      "name": "Tosot",
+      "slug": "tosot",
+      "description": "Tosot levert betrouwbare airconditioners met een uitstekende prijs-kwaliteitverhouding.",
+      "features": [
+        "I-Feel temperatuurregeling",
+        "Ultra-stil ontwerp",
+        "Intelligente ontdooiing",
+        "Multi-stage filtratie"
+      ]
+    },
+    {
+      "name": "Gree",
+      "slug": "gree",
+      "description": "Gree is wereldwijd marktleider in airconditioning met focus op innovatie en kwaliteit.",
+      "features": [
+        "G-Tech Inverter technologie",
+        "Self-clean functie",
+        "WiFi-besturing",
+        "Cold Plasma Generator"
+      ]
     }
   ]
 }
