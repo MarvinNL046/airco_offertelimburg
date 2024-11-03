@@ -8,7 +8,7 @@ Modern Next.js website voor Airco Offerte Limburg, gebouwd met de nieuwste techn
 - TypeScript
 - Tailwind CSS
 - Shadcn/ui
-- SendGrid voor e-mail
+- Email.js for contactform handeling
 - React Hook Form met Zod validatie
 
 ## Features
@@ -27,7 +27,7 @@ Modern Next.js website voor Airco Offerte Limburg, gebouwd met de nieuwste techn
 1. Clone de repository:
 
 ```bash
-git clone https://github.com/MarvinNL046/airco-offerte-limburg.git
+https://github.com/MarvinNL046/airco_offertelimburg/tree/main
 ```
 
 2. Installeer dependencies:
@@ -67,7 +67,7 @@ De statische export wordt gegenereerd in de `out` directory.
 
 - `NEXT_PUBLIC_SITE_URL`: De publieke URL van de website
 - `NEXT_PUBLIC_GA_ID`: Google Analytics ID
-- `SENDGRID_API_KEY`: SendGrid API key voor e-mail functionaliteit
+
 
 ## Contact
 
