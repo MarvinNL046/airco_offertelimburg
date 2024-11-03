@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-// This file is deprecated - using lib/mailgun.ts instead
-=======
 import sgMail from '@sendgrid/mail';
 
 if (!process.env.SENDGRID_API_KEY) {
@@ -92,4 +89,3 @@ export async function sendConfirmationEmail(data: EmailData) {
     }
   });
 }
->>>>>>> f3f2fcde4f1e0ff65a41df6dcac48af3177bf2be
