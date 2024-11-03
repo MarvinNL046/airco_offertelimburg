@@ -17,7 +17,7 @@ interface EmailData {
 }
 
 export async function sendNotificationEmail(data: EmailData) {
-  const { name, email, phone, message, subject, city } = data;
+  const { name, email, phone, message, city } = data;
   
   const locationInfo = city ? ` uit ${city}` : '';
   
