@@ -38,6 +38,10 @@
     "@radix-ui/react-toggle": "^1.0.3",
     "@radix-ui/react-toggle-group": "^1.0.4",
     "@radix-ui/react-tooltip": "^1.0.7",
+<<<<<<< HEAD
+=======
+    "@sendgrid/mail": "^8.1.1",
+>>>>>>> f3f2fcde4f1e0ff65a41df6dcac48af3177bf2be
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^0.2.1",
@@ -45,11 +49,17 @@
     "date-fns": "^2.30.0",
     "dompurify": "^3.0.8",
     "embla-carousel-react": "^8.0.0",
+<<<<<<< HEAD
     "form-data": "^4.0.0",
     "input-otp": "^1.1.0",
     "isomorphic-dompurify": "^1.9.0",
     "lucide-react": "^0.344.0",
     "mailgun.js": "^9.4.1",
+=======
+    "input-otp": "^1.1.0",
+    "isomorphic-dompurify": "^1.9.0",
+    "lucide-react": "^0.344.0",
+>>>>>>> f3f2fcde4f1e0ff65a41df6dcac48af3177bf2be
     "next": "13.5.6",
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
