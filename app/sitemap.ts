@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next'
 import diensten from '@/data/diensten.json'
 import steden from '@/data/steden.json'
 import { blogPosts } from '@/data/blog-posts'
+import articles from '@/data/kennisbank.json'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://aircooffertelimburg.nl'
@@ -17,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'kennisbank',
     'merken',
     'steden',
+    'diensten',
   ].map((route) => ({
     url: `${siteUrl}/${route}`,
     lastModified: new Date(),
@@ -50,5 +52,45 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  return [...staticPages, ...cityUrls, ...serviceUrls, ...blogUrls]
+  // Generate kennisbank URLs
+  const kennisbankUrls = articles.articles.map((article) => ({
+    url: `${siteUrl}/kennisbank/${article.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }))
+
+  // Generate brand URLs
+  const brandUrls = [
+    'daikin',
+    'mitsubishi-electric',
+    'samsung'
+  ].map((brand) => ({
+    url: `${siteUrl}/merken/${brand}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+
+  // Generate combined service-city URLs
+  const serviceCityUrls = diensten.flatMap((dienst) =>
+    steden.limburg.flatMap((municipality) =>
+      municipality.places.map((city) => ({
+        url: `${siteUrl}/diensten/${dienst.slug}/${city.toLowerCase()}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.6,
+      }))
+    )
+  )
+
+  return [
+    ...staticPages,
+    ...cityUrls,
+    ...serviceUrls,
+    ...blogUrls,
+    ...kennisbankUrls,
+    ...brandUrls,
+    ...serviceCityUrls,
+  ]
 }
