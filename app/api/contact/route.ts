@@ -47,11 +47,7 @@ export async function POST(request: Request) {
       )
     }
 
-<<<<<<< HEAD
-    // Send emails in parallel using Mailgun
-=======
     // Send emails in parallel
->>>>>>> f3f2fcde4f1e0ff65a41df6dcac48af3177bf2be
     await Promise.all([
       sendNotificationEmail({ name, email, phone, message, subject, city }),
       sendConfirmationEmail({ name, email, phone, message })
