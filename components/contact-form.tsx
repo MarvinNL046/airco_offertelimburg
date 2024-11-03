@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "sonner"
+import { Loader2 } from "lucide-react"
+import { sendEmail } from "@/lib/emailjs"
 
 interface ContactFormProps {
   cityName?: string
@@ -26,21 +28,7 @@ export function ContactForm({ cityName }: ContactFormProps) {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...formData,
-          subject: `Nieuwe offerte aanvraag${cityName ? ` uit ${cityName}` : ""}`,
-        }),
-      })
-
-      if (!response.ok) {
-        throw new Error("Er ging iets mis")
-      }
-
+      await sendEmail(formData)
       toast.success("Uw aanvraag is succesvol verzonden!")
       setFormData({
         name: "",
@@ -86,8 +74,19 @@ export function ContactForm({ cityName }: ContactFormProps) {
         required
         rows={4}
       />
-      <Button type="submit" className="w-full bg-green-600 hover:bg-green-700" disabled={isSubmitting}>
-        {isSubmitting ? "Bezig met verzenden..." : "Verstuur Aanvraag"}
+      <Button 
+        type="submit" 
+        className="w-full bg-green-600 hover:bg-green-700" 
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Bezig met verzenden...
+          </>
+        ) : (
+          "Verstuur Aanvraag"
+        )}
       </Button>
     </form>
   )
