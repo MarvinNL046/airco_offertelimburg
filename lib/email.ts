@@ -1,11 +1,16 @@
 import formData from 'form-data';
 import Mailgun from 'mailgun.js';
 
+// Initialiseer Mailgun client
 const mailgun = new Mailgun(formData);
 const mg = mailgun.client({
   username: 'api',
   key: process.env.MAILGUN_API_KEY as string,
 });
+
+// Debugging: Log de API-sleutel en domein om te controleren of ze correct worden geladen
+console.log("Mailgun API Key:", process.env.MAILGUN_API_KEY);
+console.log("Mailgun Domain:", process.env.MAILGUN_DOMAIN);
 
 interface EmailData {
   name: string;
@@ -16,13 +21,13 @@ interface EmailData {
   city?: string;
 }
 
+// Functie voor het verzenden van een notificatie-email
 export async function sendNotificationEmail(data: EmailData) {
   const { name, email, phone, message, city } = data;
-  
   const locationInfo = city ? ` uit ${city}` : '';
-  
+
   const emailData = {
-    from: 'noreply@aircooffertelimburg.nl', // Zorg ervoor dat dit je geverifieerde Mailgun-adres is
+    from: 'noreply@aircooffertelimburg.nl', // Zorg ervoor dat dit geverifieerd is in Mailgun
     to: 'info@staycoolairco.nl',
     subject: `Nieuwe Lead${locationInfo} - Airco Offerte Limburg`,
     html: `
@@ -43,14 +48,23 @@ export async function sendNotificationEmail(data: EmailData) {
     `,
   };
 
-  return mg.messages.create(process.env.MAILGUN_DOMAIN as string, emailData);
+  try {
+    // Probeer de e-mail te verzenden
+    const response = await mg.messages.create(process.env.MAILGUN_DOMAIN as string, emailData);
+    console.log("Notification email sent successfully:", response);
+    return response;
+  } catch (error) {
+    console.error("Error sending notification email:", error);
+    throw error;
+  }
 }
 
+// Functie voor het verzenden van een bevestigings-email naar de gebruiker
 export async function sendConfirmationEmail(data: EmailData) {
   const { name, email } = data;
 
   const emailData = {
-    from: 'noreply@aircooffertelimburg.nl', // Zorg ervoor dat dit je geverifieerde Mailgun-adres is
+    from: 'noreply@aircooffertelimburg.nl', // Zorg ervoor dat dit geverifieerd is in Mailgun
     to: email,
     subject: 'Bedankt voor uw aanvraag - Airco Offerte Limburg',
     html: `
@@ -75,5 +89,13 @@ export async function sendConfirmationEmail(data: EmailData) {
     `,
   };
 
-  return mg.messages.create(process.env.MAILGUN_DOMAIN as string, emailData);
+  try {
+    // Probeer de e-mail te verzenden
+    const response = await mg.messages.create(process.env.MAILGUN_DOMAIN as string, emailData);
+    console.log("Confirmation email sent successfully:", response);
+    return response;
+  } catch (error) {
+    console.error("Error sending confirmation email:", error);
+    throw error;
+  }
 }
