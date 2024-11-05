@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import diensten from '@/data/diensten.json'
 import steden from '@/data/steden.json'
 import { blogPosts } from '@/data/blog-posts'
-import articles from '@/data/kennisbank.json'
+import brands from '@/data/brands.json'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://aircooffertelimburg.nl'
@@ -67,12 +67,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
   // Generate brand URLs
-  const brandUrls = [
-    'daikin',
-    'mitsubishi-electric',
-    'samsung'
-  ].map((brand) => ({
-    url: `${siteUrl}/merken/${brand}`,
+  const brandUrls = brands.brands.map((brand) => ({
+    url: `${siteUrl}/merken/${brand.slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
