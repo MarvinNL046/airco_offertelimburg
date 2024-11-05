@@ -53,11 +53,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
   // Generate kennisbank URLs
-  const kennisbankUrls = articles.articles.map((article) => ({
-    url: `${siteUrl}/kennisbank/${article.slug}`,
+  const kennisbankUrls = [
+    'klimaatbeheersing',
+    'scop-seer-waarden',
+    'energiebesparing',
+    'onderhoud-tips',
+    'voordelen-airconditioning'
+  ].map((slug) => ({
+    url: `${siteUrl}/kennisbank/${slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
-    priority: 0.6,
+    priority: 0.7,
   }))
 
   // Generate brand URLs

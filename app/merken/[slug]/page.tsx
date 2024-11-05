@@ -2,7 +2,12 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { Card } from "@/components/ui/card"
 import { Breadcrumb } from "@/components/navigation/breadcrumb"
+import { ContactForm } from "@/components/contact-form"
 import brandsData from "@/data/brands.json"
+import { BrandInfo } from "@/components/merken/brand-info"
+import { BrandFeatures } from "@/components/merken/brand-features"
+import { BrandModels } from "@/components/merken/brand-models"
+import { BrandTechnology } from "@/components/merken/brand-technology"
 
 interface BrandPageProps {
   params: {
@@ -51,22 +56,19 @@ export default function BrandPage({ params }: BrandPageProps) {
       <h1 className="mb-8 text-4xl font-bold">{brand.name} Airconditioners</h1>
       
       <div className="grid gap-8 lg:grid-cols-2">
-        <div>
+        <div className="space-y-8">
+          <BrandInfo brand={brand} />
+          <BrandFeatures brand={brand} />
+          <BrandModels brand={brand} />
+          <BrandTechnology brand={brand} />
+        </div>
+
+        <div className="space-y-8">
           <Card className="p-6">
-            <h2 className="text-2xl font-semibold mb-4">Over {brand.name}</h2>
-            <p className="text-muted-foreground">{brand.description}</p>
-            
-            <h3 className="text-xl font-semibold mt-6 mb-3">Kenmerken</h3>
-            <ul className="space-y-2">
-              {brand.features.map((feature, index) => (
-                <li key={index} className="flex items-center gap-2">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 text-blue-600">
-                    ✓
-                  </span>
-                  {feature}
-                </li>
-              ))}
-            </ul>
+            <h2 className="text-2xl font-semibold mb-6">
+              Vraag een Offerte Aan voor {brand.name}
+            </h2>
+            <ContactForm />
           </Card>
         </div>
       </div>

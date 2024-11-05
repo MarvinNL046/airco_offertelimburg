@@ -34,6 +34,28 @@
       ]
     },
     {
+      "name": "Toshiba",
+      "slug": "toshiba",
+      "description": "Toshiba staat bekend om zijn betrouwbare en innovatieve airconditioners met geavanceerde technologie.",
+      "features": [
+        "HADA Care luchtstroom",
+        "Ultra HD filtratie",
+        "Hybrid Inverter technologie",
+        "Toshiba Home AC Control app"
+      ]
+    },
+    {
+      "name": "Mitsubishi Heavy Industries",
+      "slug": "mitsubishi-heavy",
+      "description": "Mitsubishi Heavy Industries levert robuuste en efficiënte airconditioners met superieure prestaties.",
+      "features": [
+        "Silent Operation technologie",
+        "Allergen Clear systeem",
+        "3D Auto luchtstroomregeling",
+        "Wi-Fi control mogelijkheid"
+      ]
+    },
+    {
       "name": "LG",
       "slug": "lg",
       "description": "LG biedt innovatieve airconditioners met geavanceerde technologieën voor optimaal comfort.",

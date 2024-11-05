@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { Card } from "@/components/ui/card"
 import { Breadcrumb } from "@/components/navigation/breadcrumb"
 import { RelatedArticles } from "@/components/sections/related-articles"
+import { ArticleContent } from "@/components/kennisbank/article-content"
 import articles from "@/data/kennisbank.json"
 
 interface Props {
@@ -81,7 +82,11 @@ export default function ArticlePage({ params }: Props) {
         </div>
         <div className="prose max-w-none">
           <p className="text-lg text-muted-foreground">{article.description}</p>
-          <div className="mt-6">{article.content}</div>
+          {article.slug === 'scop-seer-waarden' ? (
+            <ArticleContent />
+          ) : (
+            <div className="mt-6">{article.content}</div>
+          )}
         </div>
       </Card>
 
