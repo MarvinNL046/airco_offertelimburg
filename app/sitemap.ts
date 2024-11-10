@@ -23,9 +23,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ].map((page) => ({
     url: `${siteUrl}/${page.route}`,
     lastModified,
-    changeFrequency: page.route === '' ? 'daily' : 'weekly' as const,
+    changeFrequency: page.route === '' ? 'daily' : 'weekly',
     priority: page.priority,
-  }))
+  })) as MetadataRoute.Sitemap
 
   // Get all cities
   const cities = await getCities()
@@ -35,7 +35,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${siteUrl}/steden/${city.slug}`,
     lastModified,
     changeFrequency: 'weekly' as const,
-    // Higher priority for larger cities
     priority: city.population > 50000 ? 0.9 : 
              city.population > 20000 ? 0.8 : 
              city.population > 10000 ? 0.7 : 0.6,
@@ -58,7 +57,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${siteUrl}/blog/${post.slug}`,
       lastModified: postDate,
       changeFrequency: 'monthly' as const,
-      // Newer posts get higher priority
       priority: ageInDays < 30 ? 0.8 :
                ageInDays < 90 ? 0.7 :
                0.6,
@@ -79,7 +77,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${siteUrl}/diensten/${dienst.slug}/${city.slug}`,
       lastModified,
       changeFrequency: 'weekly' as const,
-      // Higher priority for service pages in larger cities
       priority: city.population > 50000 ? 0.8 : 
                city.population > 20000 ? 0.7 : 
                0.6,
