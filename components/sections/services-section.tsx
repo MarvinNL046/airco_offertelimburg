@@ -4,30 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { AirVent, Settings, Wrench } from "lucide-react"
 import Link from "next/link"
-
-const services = [
-  {
-    icon: AirVent,
-    title: "Airco Installatie",
-    description: "Professionele installatie van airconditioning systemen voor uw woning of bedrijf.",
-    price: "Vanaf €999,-",
-    link: "/diensten/installatie",
-  },
-  {
-    icon: Settings,
-    title: "Airco Onderhoud",
-    description: "Regelmatig onderhoud voor optimale prestaties en langere levensduur van uw systeem.",
-    price: "Vanaf €89,-",
-    link: "/diensten/onderhoud",
-  },
-  {
-    icon: Wrench,
-    title: "Airco Reparatie",
-    description: "Snelle en vakkundige reparatie bij storingen aan uw airconditioner.",
-    price: "Vanaf €129,-",
-    link: "/diensten/reparatie",
-  },
-]
+import diensten from "@/data/diensten.json"
 
 export function ServicesSection() {
   return (
@@ -42,24 +19,35 @@ export function ServicesSection() {
           </p>
         </div>
         <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => (
-            <div
-              key={index}
-              className="transform transition-all duration-300 hover:-translate-y-1"
-            >
-              <Card className="flex h-full flex-col p-6">
-                <service.icon className="h-12 w-12 text-blue-600" />
-                <h3 className="mt-4 text-xl font-semibold">{service.title}</h3>
-                <p className="mt-2 flex-1 text-muted-foreground">{service.description}</p>
-                <div className="mt-6">
-                  <p className="text-lg font-semibold text-blue-600">{service.price}</p>
-                  <Button className="mt-4 w-full" asChild>
-                    <Link href={service.link}>Meer Informatie</Link>
-                  </Button>
-                </div>
-              </Card>
-            </div>
-          ))}
+          {diensten.map((dienst) => {
+            const Icon = dienst.slug === 'installatie' ? AirVent :
+                        dienst.slug === 'onderhoud' ? Settings :
+                        Wrench
+
+            return (
+              <div
+                key={dienst.slug}
+                className="transform transition-all duration-300 hover:-translate-y-1"
+              >
+                <Card className="flex h-full flex-col p-6">
+                  <Icon className="h-12 w-12 text-blue-600" />
+                  <h3 className="mt-4 text-xl font-semibold">{dienst.title}</h3>
+                  <p className="mt-2 flex-1 text-muted-foreground">{dienst.description}</p>
+                  <div className="mt-6">
+                    <p className="text-lg font-semibold text-blue-600">
+                      Vanaf €{dienst.price.from},-
+                      {dienst.price.period && <span className="text-sm"> {dienst.price.period}</span>}
+                    </p>
+                    <Button className="mt-4 w-full" asChild>
+                      <Link href={`/diensten/${dienst.slug}`}>
+                        Meer Informatie
+                      </Link>
+                    </Button>
+                  </div>
+                </Card>
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>

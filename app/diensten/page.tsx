@@ -4,32 +4,21 @@ import { CTAWithForm } from "@/components/sections/cta-with-form"
 import { Card } from "@/components/ui/card"
 import { AirVent, Settings, Wrench } from "lucide-react"
 import Link from "next/link"
+import diensten from "@/data/diensten.json"
 
 export const metadata: Metadata = {
   title: "Onze Diensten | Airco Offerte Limburg",
-  description: "Bekijk ons complete aanbod van airconditioning diensten in Limburg",
+  description: "Bekijk ons complete aanbod van airconditioning diensten in Limburg. Van installatie en onderhoud tot reparatie, wij zijn uw betrouwbare partner.",
+  keywords: [
+    "airco diensten",
+    "airconditioning services",
+    "airco installatie",
+    "airco onderhoud",
+    "airco reparatie",
+    "Limburg",
+    "professionele airco service"
+  ],
 }
-
-const services = [
-  {
-    icon: AirVent,
-    title: "Airco Installatie",
-    description: "Professionele installatie van airconditioningsystemen voor uw woning of bedrijf.",
-    slug: "airco-installatie",
-  },
-  {
-    icon: Settings,
-    title: "Airco Onderhoud",
-    description: "Regelmatig onderhoud voor optimale prestaties en langere levensduur van uw systeem.",
-    slug: "airco-onderhoud",
-  },
-  {
-    icon: Wrench,
-    title: "Airco Reparatie",
-    description: "Snelle en vakkundige reparatie bij storingen aan uw airconditioner.",
-    slug: "airco-reparatie",
-  },
-]
 
 export default function DienstenPage() {
   const breadcrumbItems = [
@@ -43,14 +32,22 @@ export default function DienstenPage() {
       <h1 className="text-4xl font-bold mb-8">Onze Diensten</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-        {services.map((service) => {
-          const Icon = service.icon
+        {diensten.map((dienst) => {
+          const Icon = dienst.slug === 'installatie' ? AirVent :
+                      dienst.slug === 'onderhoud' ? Settings :
+                      Wrench
+
           return (
-            <Link key={service.slug} href={`/diensten/${service.slug}`}>
+            <Link key={dienst.slug} href={`/diensten/${dienst.slug}`}>
               <Card className="p-6 h-full hover:shadow-lg transition-shadow">
                 <Icon className="h-12 w-12 text-blue-600 mb-4" />
-                <h2 className="text-2xl font-semibold mb-3">{service.title}</h2>
-                <p className="text-gray-600">{service.description}</p>
+                <h2 className="text-2xl font-semibold mb-3">{dienst.title}</h2>
+                <p className="text-gray-600 mb-4">{dienst.description}</p>
+                <div className="mt-auto">
+                  <p className="text-lg font-semibold text-blue-600">
+                    Vanaf €{dienst.price.from},-
+                  </p>
+                </div>
               </Card>
             </Link>
           )

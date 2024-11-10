@@ -1,41 +1,26 @@
 import { Metadata } from "next"
+import Link from "next/link"
 import { Card } from "@/components/ui/card"
 import { Breadcrumb } from "@/components/navigation/breadcrumb"
-import Link from "next/link"
+import { blogPosts } from "@/data/blog-posts"
 
 export const metadata: Metadata = {
   title: "Blog | Airco Offerte Limburg",
   description: "Lees onze laatste artikelen over airconditioning, klimaatbeheersing, energiebesparing en meer.",
+  keywords: [
+    "airco blog",
+    "klimaatbeheersing blog",
+    "airconditioning tips",
+    "energiebesparing airco",
+    "airco onderhoud tips",
+    "Limburg airco nieuws"
+  ],
 }
-
-const blogPosts = [
-  {
-    title: "Voordelen van Airconditioning",
-    slug: "voordelen-van-airconditioning",
-    excerpt: "Ontdek waarom steeds meer mensen kiezen voor een airco en wat de voordelen zijn voor uw woning of kantoor.",
-    date: "2024-02-15",
-    category: "Advies"
-  },
-  {
-    title: "Energiebesparing met Moderne Airco's",
-    slug: "energiebesparing-met-moderne-aircos",
-    excerpt: "Leer hoe moderne airconditioners bijdragen aan energiebesparing en een lagere energierekening.",
-    date: "2024-02-10",
-    category: "Energie"
-  },
-  {
-    title: "Onderhoudstips voor uw Airco",
-    slug: "onderhoudstips-voor-uw-airco",
-    excerpt: "Praktische tips voor het onderhouden van uw airconditioning voor optimale prestaties en een lange levensduur.",
-    date: "2024-02-05",
-    category: "Onderhoud"
-  }
-]
 
 export default function BlogPage() {
   const breadcrumbItems = [
     { label: "Blog", href: "/blog" }
-  ];
+  ]
 
   return (
     <div className="container py-12">
@@ -59,7 +44,7 @@ export default function BlogPage() {
               </div>
               <h2 className="mb-2 text-2xl font-semibold">{post.title}</h2>
               <div className="mb-4 inline-block rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-800">
-                {post.category}
+                Blog
               </div>
               <p className="text-muted-foreground">{post.excerpt}</p>
             </Card>

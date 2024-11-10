@@ -1,7 +1,8 @@
 import { Metadata } from "next"
+import { notFound } from "next/navigation"
 import { CityContent } from "@/components/city/city-content"
-import citiesData from "@/data/steden.json"
-import { generateLocalBusinessSchema } from "@/lib/structured-data"
+import { getCityBySlug, getNearbyCity, generateMetaDescription, generateCityTitle, generateCityKeywords } from "@/lib/cities"
+import { generateLocalBusinessSchema, generateFAQSchema } from "@/lib/schema"
 import Script from "next/script"
 
 interface CityPageProps {
@@ -10,53 +11,72 @@ interface CityPageProps {
   }
 }
 
-export function generateMetadata({ params }: CityPageProps): Metadata {
-  const cityName = params.city.charAt(0).toUpperCase() + params.city.slice(1)
+export async function generateMetadata({ params }: CityPageProps): Promise<Metadata> {
+  const city = await getCityBySlug(params.city)
   
+  if (!city) {
+    return {
+      title: "Stad niet gevonden | Airco Offerte Limburg",
+      description: "De opgevraagde stad kon niet worden gevonden.",
+    }
+  }
+
+  const cityFaqs = [
+    {
+      question: `Wat kost een airco installatie in ${city.city}?`,
+      answer: `De kosten voor een airco installatie in ${city.city} beginnen vanaf €999. De exacte prijs hangt af van het type systeem en de specifieke situatie. Vraag een gratis offerte aan voor een exacte prijsopgave.`
+    },
+    {
+      question: `Hoe snel kunnen jullie een airco installeren in ${city.city}?`,
+      answer: `In ${city.city} kunnen we meestal binnen 1-2 weken uw airco installeren. Bij spoed is snellere installatie mogelijk. Neem contact op voor de actuele planning.`
+    },
+    {
+      question: `Welke merken airco's installeren jullie in ${city.city}?`,
+      answer: `In ${city.city} installeren we alle topmerken zoals Daikin, Mitsubishi, Samsung en Toshiba. We adviseren u graag over de beste keuze voor uw situatie.`
+    }
+  ]
+
   return {
-    title: `Airco Installatie ${cityName} | Airco Offerte Limburg`,
-    description: `Professionele airconditioning installatie en onderhoud in ${cityName}. ✓ Erkend ✓ Gecertificeerd ✓ Vakkundig. Vraag nu een vrijblijvende offerte aan!`,
+    title: generateCityTitle(city),
+    description: generateMetaDescription(city),
     openGraph: {
-      title: `Airco Installatie ${cityName} | Airco Offerte Limburg`,
-      description: `Professionele airconditioning installatie en onderhoud in ${cityName}. Erkend en gecertificeerd installateur.`,
+      title: generateCityTitle(city),
+      description: generateMetaDescription(city),
       url: `https://aircooffertelimburg.nl/steden/${params.city}`,
       siteName: "Airco Offerte Limburg",
       locale: "nl_NL",
       type: "website",
     },
+    alternates: {
+      canonical: `https://aircooffertelimburg.nl/steden/${params.city}`,
+    },
+    keywords: generateCityKeywords(city),
   }
 }
 
-export function generateStaticParams() {
-  const allCities = citiesData.limburg.reduce((acc: string[], municipality) => {
-    return [...acc, ...municipality.places.map(place => place.toLowerCase())]
-  }, [])
+export default async function CityPage({ params }: CityPageProps) {
+  const city = await getCityBySlug(params.city)
+  const nearbyCities = await getNearbyCity(params.city)
 
-  return allCities.map((city) => ({
-    city: city.toLowerCase(),
-  }))
-}
-
-export default function CityPage({ params }: CityPageProps) {
-  const cityData = citiesData.limburg.find((municipality) =>
-    municipality.places.some(
-      (place) => place.toLowerCase() === params.city.toLowerCase()
-    )
-  )
-
-  if (!cityData) {
-    return null
+  if (!city) {
+    notFound()
   }
 
-  const cityName = params.city.charAt(0).toUpperCase() + params.city.slice(1)
-  const localBusinessSchema = generateLocalBusinessSchema(cityName)
-
-  const city = {
-    title: cityName,
-    description: `Professionele airconditioning services in ${cityName}. Wij bieden complete airco-oplossingen voor zowel particulieren als bedrijven.`,
-    places: cityData.places,
-    region: cityData.municipality
-  }
+  const localBusinessSchema = generateLocalBusinessSchema(city.city)
+  const faqSchema = generateFAQSchema([
+    {
+      question: `Wat kost een airco installatie in ${city.city}?`,
+      answer: `De kosten voor een airco installatie in ${city.city} beginnen vanaf €999. De exacte prijs hangt af van het type systeem en de specifieke situatie. Vraag een gratis offerte aan voor een exacte prijsopgave.`
+    },
+    {
+      question: `Hoe snel kunnen jullie een airco installeren in ${city.city}?`,
+      answer: `In ${city.city} kunnen we meestal binnen 1-2 weken uw airco installeren. Bij spoed is snellere installatie mogelijk. Neem contact op voor de actuele planning.`
+    },
+    {
+      question: `Welke merken airco's installeren jullie in ${city.city}?`,
+      answer: `In ${city.city} installeren we alle topmerken zoals Daikin, Mitsubishi, Samsung en Toshiba. We adviseren u graag over de beste keuze voor uw situatie.`
+    }
+  ])
 
   return (
     <>
@@ -65,7 +85,18 @@ export default function CityPage({ params }: CityPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
       />
-      <CityContent city={city} />
+      <Script
+        id="faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <CityContent city={city} nearbyCities={nearbyCities} />
     </>
   )
 }
+
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+
+// Revalidate the page every hour
+export const revalidate = 3600

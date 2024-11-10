@@ -2,7 +2,7 @@
   {
     "slug": "installatie",
     "title": "Airco Installatie",
-    "description": "Professionele airco installatie met garantie. Onze ervaren monteurs zorgen voor een perfecte installatie van uw nieuwe airconditioner, waarbij we rekening houden met uw specifieke wensen en de kenmerken van uw woning of bedrijfspand.",
+    "description": "Professionele installatie van airconditioning systemen voor uw woning of bedrijf.",
     "benefits": [
       "Gratis inspectie en advies aan huis",
       "Vakkundige installatie door gecertificeerde monteurs",
@@ -18,14 +18,14 @@
       "5 jaar garantie op installatie"
     ],
     "price": {
-      "from": 999,
+      "from": 1299,
       "currency": "EUR"
     }
   },
   {
     "slug": "onderhoud",
     "title": "Airco Onderhoud",
-    "description": "Regelmatig onderhoud van uw airconditioning systeem is essentieel voor optimale prestaties en een lange levensduur. Ons onderhoudsteam zorgt ervoor dat uw airco in topconditie blijft.",
+    "description": "Regelmatig onderhoud van uw airconditioning systeem is essentieel voor optimale prestaties en een lange levensduur.",
     "benefits": [
       "Preventief onderhoud voorkomt storingen",
       "Verlenging van de levensduur van uw systeem",
@@ -41,14 +41,15 @@
       "Uitgebreid onderhoudsrapport"
     ],
     "price": {
-      "from": 89,
-      "currency": "EUR"
+      "from": 9,
+      "currency": "EUR",
+      "period": "per maand"
     }
   },
   {
     "slug": "reparatie",
     "title": "Airco Reparatie",
-    "description": "Bij storingen aan uw airconditioning staat ons team van experts voor u klaar. We bieden snelle en effectieve reparatie diensten om uw comfort zo snel mogelijk te herstellen.",
+    "description": "Bij storingen aan uw airconditioning staat ons team van experts voor u klaar.",
     "benefits": [
       "Snelle responstijd bij storingen",
       "Ervaren monteurs voor alle merken",

@@ -7,6 +7,12 @@ module.exports = {
       {
         userAgent: '*',
         allow: '/',
+        disallow: [
+          '/api/',
+          '/admin/',
+          '/_next/',
+          '/private/',
+        ],
       },
     ],
     additionalSitemaps: [
@@ -16,6 +22,8 @@ module.exports = {
   },
   exclude: ['/404', '/500', '/offline'],
   generateIndexSitemap: true,
+  changefreq: 'daily',
   priority: 0.7,
-  changefreq: 'weekly',
+  sitemapSize: 5000,
+  autoLastmod: true,
 }
