@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  output: 'standalone',
   images: { 
     unoptimized: true,
     remotePatterns: [
@@ -14,6 +14,9 @@ const nextConfig = {
   swcMinify: true,
   experimental: {
     optimizePackageImports: ['lucide-react']
+  },
+  env: {
+    NEXT_PUBLIC_SITE_URL: 'https://aircooffertelimburg.nl'
   }
 }
 

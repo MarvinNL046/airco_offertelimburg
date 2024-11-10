@@ -3,14 +3,18 @@ import { Card } from "@/components/ui/card"
 import { MapPin, Phone, Mail, ThermometerSun } from "lucide-react"
 import Link from "next/link"
 import { ContactForm } from "@/components/contact-form"
-import type { City } from "@/lib/cities"
 
 interface CityContentProps {
-  city: City
-  nearbyCities: City[]
+  city: {
+    title: string
+    description: string
+    region: string
+    population: number
+    postal_codes: string
+  }
 }
 
-export function CityContent({ city, nearbyCities }: CityContentProps) {
+export function CityContent({ city }: CityContentProps) {
   return (
     <div className="container py-12">
       <div className="grid gap-6 lg:grid-cols-2">
@@ -21,61 +25,52 @@ export function CityContent({ city, nearbyCities }: CityContentProps) {
           </div>
           
           <h1 className="text-4xl font-bold tracking-tight mb-4">
-            Airco Installatie {city.city}
+            Airco Installatie {city.title}
           </h1>
           
-          <div className="flex flex-wrap gap-2 mb-6">
-            <span className="inline-flex items-center px-3 py-1 rounded-md bg-blue-50 text-blue-700 text-sm">
-              Postcodes: {city.postal_codes}
-            </span>
-            <span className="inline-flex items-center px-3 py-1 rounded-md bg-green-50 text-green-700 text-sm">
-              {city.population.toLocaleString()} inwoners
-            </span>
-          </div>
-
           <p className="text-xl text-muted-foreground mb-8">
-            Professionele airconditioning services in {city.city}. Wij bieden complete 
-            airco-oplossingen voor zowel particulieren als bedrijven in {city.region}.
+            {city.description}
           </p>
 
           <Card className="p-6 mb-8">
             <h2 className="text-2xl font-semibold mb-4">
-              Onze Services in {city.city}
+              Onze Services in {city.title}
             </h2>
             <ul className="space-y-3">
               <li className="flex items-center gap-3">
                 <ThermometerSun className="h-5 w-5 text-blue-600" />
-                <span>Airco installatie</span>
+                <span>Airco installatie vanaf €1299,-</span>
               </li>
               <li className="flex items-center gap-3">
                 <ThermometerSun className="h-5 w-5 text-blue-600" />
-                <span>Airco onderhoud</span>
+                <span>Airco onderhoud vanaf €9,- p.m.</span>
               </li>
               <li className="flex items-center gap-3">
                 <ThermometerSun className="h-5 w-5 text-blue-600" />
-                <span>Airco reparatie</span>
+                <span>Airco reparatie vanaf €129,-</span>
               </li>
             </ul>
           </Card>
 
-          {nearbyCities.length > 0 && (
-            <Card className="p-6">
-              <h2 className="text-2xl font-semibold mb-4">
-                Ook actief in de omgeving van {city.city}
-              </h2>
-              <div className="flex flex-wrap gap-2">
-                {nearbyCities.map((nearbyCity) => (
-                  <Link 
-                    key={nearbyCity.slug}
-                    href={`/steden/${nearbyCity.slug}`}
-                    className="inline-flex items-center px-3 py-1 rounded-md bg-blue-50 text-blue-700 text-sm hover:bg-blue-100 transition-colors"
-                  >
-                    {nearbyCity.city}
-                  </Link>
-                ))}
-              </div>
-            </Card>
-          )}
+          <Card className="p-6">
+            <h2 className="text-2xl font-semibold mb-4">
+              Over {city.title}
+            </h2>
+            <ul className="space-y-2">
+              <li className="flex items-center gap-2">
+                <span className="font-medium">Inwoners:</span>
+                <span>{city.population.toLocaleString()}</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="font-medium">Postcodes:</span>
+                <span>{city.postal_codes}</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="font-medium">Regio:</span>
+                <span>{city.region}</span>
+              </li>
+            </ul>
+          </Card>
         </div>
 
         <div>
@@ -83,7 +78,7 @@ export function CityContent({ city, nearbyCities }: CityContentProps) {
             <h2 className="text-2xl font-semibold mb-6">
               Vraag een Offerte Aan
             </h2>
-            <ContactForm cityName={city.city} />
+            <ContactForm cityName={city.title} />
           </Card>
 
           <Card className="p-6">
