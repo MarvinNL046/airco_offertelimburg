@@ -4,7 +4,7 @@ import { getCities } from '@/lib/cities'
 import { blogPosts } from '@/data/blog-posts'
 import brands from '@/data/brands.json'
 
-export default async function sitemap(): MetadataRoute.Sitemap {
+export async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://aircooffertelimburg.nl'
   const lastModified = new Date()
 

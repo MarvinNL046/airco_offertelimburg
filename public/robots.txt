@@ -7,8 +7,6 @@ Host: https://aircooffertelimburg.nl
 
 # Sitemaps
 Sitemap: https://aircooffertelimburg.nl/sitemap.xml
-Sitemap: https://aircooffertelimburg.nl/sitemap-locations.xml
-Sitemap: https://aircooffertelimburg.nl/sitemap-services.xml
 
 # Crawl-delay
 Crawl-delay: 10
