@@ -63,7 +63,37 @@ export function generateMetadata({ params }: Props): Metadata {
       "klimaatbeheersing",
       params.city,
       "Limburg",
-    ],
+      "Airco installatie Limburg",
+      "Airconditioning Limburg",
+      "Airco onderhoud Limburg",
+      "Klimaatbeheersing Limburg",
+      "Airco specialist Limburg",
+      "Airco montage Limburg",
+      "Airco reparatie Limburg",
+      "Warmtepomp installatie Limburg",
+      "Duurzame koeling Limburg",
+      "Energiezuinige airco Limburg",
+      "Professionele airco service Limburg",
+      "Aircop systemen Limburg",
+      "Binnenklimaat verbetering Limburg",
+      "Airco voor bedrijven Limburg",
+      "Residentiële airconditioning Limburg",
+      "Commerciële airconditioning Limburg",
+      "Split-unit airco Limburg",
+      "Multi-split airco systemen Limburg",
+      "Mobiele airco Limburg",
+      "LG airco Limburg",
+      "Daikin airco Limburg",
+      "Mitsubishi airco Limburg",
+      "Airco met wifi-bediening Limburg",
+      "Geluidsarme airco Limburg",
+      "Airco met luchtzuivering Limburg",
+      "Airco voor slaapkamer Limburg",
+      "Airco voor kantoor Limburg",
+      "Airco onderhoud contract Limburg",
+      "24/7 airco service Limburg",
+      "Airco met warmtepompfunctie Limburg"
+    ]
   }
 }
 
@@ -75,10 +105,13 @@ export default function DienstStadPage({ params }: Props) {
     notFound()
   }
 
+  // Convert price object to string format
+  const priceString = `${dienst.price.from}${dienst.price.period ? ` ${dienst.price.period}` : ''}`
+
   const serviceSchema = generateServiceSchema({
     name: `${dienst.title} in ${cityName}`,
     description: dienst.description,
-    price: dienst.price,
+    price: priceString,
   })
 
   const localBusinessSchema = generateLocalBusinessSchema(cityName)

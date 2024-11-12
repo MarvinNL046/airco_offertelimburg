@@ -1,4 +1,4 @@
-import { WithContext, Organization, Service, LocalBusiness, BreadcrumbList, FAQPage, Review, AggregateRating } from "schema-dts"
+import { Organization, WithContext, Service, LocalBusiness, BreadcrumbList } from "schema-dts"
 
 export function generateOrganizationSchema(): WithContext<Organization> {
   return {
@@ -7,20 +7,16 @@ export function generateOrganizationSchema(): WithContext<Organization> {
     name: "Airco Offerte Limburg",
     url: "https://aircooffertelimburg.nl",
     logo: "https://aircooffertelimburg.nl/logo.png",
-    description: "Professionele airconditioning installatie en onderhoud in Limburg. Erkend en gecertificeerd installateur.",
+    description: "Professionele airconditioning services in Limburg",
     address: {
       "@type": "PostalAddress",
       addressRegion: "Limburg",
       addressCountry: "NL",
-      postalCode: "6161",
     },
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+31462021430",
-      email: "info@staycoolairco.nl",
+      telephone: "+31-46-202-1430",
       contactType: "customer service",
-      availableLanguage: ["Dutch", "English"],
-      areaServed: "Limburg"
     },
     sameAs: [
       "https://facebook.com/aircooffertelimburg",
@@ -30,38 +26,14 @@ export function generateOrganizationSchema(): WithContext<Organization> {
     areaServed: {
       "@type": "State",
       name: "Limburg",
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "127",
-      bestRating: "5",
-      worstRating: "1"
-    },
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
-      opens: "08:00",
-      closes: "18:00"
-    },
-    priceRange: "€€",
-    paymentAccepted: ["Cash", "Credit Card", "Bank Transfer"],
-    currenciesAccepted: "EUR"
+    }
   }
 }
 
 export function generateServiceSchema(service: {
-  name: string
-  description: string
-  price: { from: number; currency: string }
-  image?: string
+  name: string;
+  description: string;
+  price: string;
 }): WithContext<Service> {
   return {
     "@context": "https://schema.org",
@@ -71,7 +43,6 @@ export function generateServiceSchema(service: {
     provider: {
       "@type": "Organization",
       name: "Airco Offerte Limburg",
-      url: "https://aircooffertelimburg.nl"
     },
     areaServed: {
       "@type": "State",
@@ -81,17 +52,10 @@ export function generateServiceSchema(service: {
       "@type": "Offer",
       priceSpecification: {
         "@type": "PriceSpecification",
-        price: service.price.from,
-        priceCurrency: service.price.currency,
-        minPrice: service.price.from,
+        price: service.price,
+        priceCurrency: "EUR",
       },
-      availability: "https://schema.org/InStock",
-      areaServed: "Limburg",
-      validFrom: new Date().toISOString()
     },
-    image: service.image,
-    termsOfService: "https://aircooffertelimburg.nl/voorwaarden",
-    serviceType: "Airconditioning Service",
   }
 }
 
@@ -104,8 +68,6 @@ export function generateLocalBusinessSchema(city: string): WithContext<LocalBusi
     url: `https://aircooffertelimburg.nl/steden/${city.toLowerCase()}`,
     telephone: "+31462021430",
     email: "info@staycoolairco.nl",
-    priceRange: "€€",
-    image: "https://aircooffertelimburg.nl/logo.png",
     areaServed: {
       "@type": "City",
       name: city,
@@ -118,28 +80,8 @@ export function generateLocalBusinessSchema(city: string): WithContext<LocalBusi
       "@type": "PostalAddress",
       addressRegion: "Limburg",
       addressCountry: "NL",
-      postalCode: "6161",
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: "51.2195",
-      longitude: "5.9553"
-    },
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ],
-      opens: "08:00",
-      closes: "18:00",
-    },
-    paymentAccepted: ["Cash", "Credit Card", "Bank Transfer"],
-    currenciesAccepted: "EUR",
+    priceRange: "€€",
   }
 }
 
@@ -153,69 +95,5 @@ export function generateBreadcrumbSchema(items: { name: string; item: string }[]
       name: item.name,
       item: `https://aircooffertelimburg.nl${item.item}`,
     })),
-  }
-}
-
-export function generateFAQSchema(faqs: { question: string; answer: string }[]): WithContext<FAQPage> {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map(faq => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer
-      }
-    }))
-  }
-}
-
-export function generateReviewSchema(review: {
-  author: string
-  reviewBody: string
-  reviewRating: number
-  datePublished: string
-}): WithContext<Review> {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Review",
-    reviewRating: {
-      "@type": "Rating",
-      ratingValue: review.reviewRating,
-      bestRating: "5",
-      worstRating: "1"
-    },
-    author: {
-      "@type": "Person",
-      name: review.author
-    },
-    reviewBody: review.reviewBody,
-    datePublished: review.datePublished,
-    itemReviewed: {
-      "@type": "LocalBusiness",
-      name: "Airco Offerte Limburg",
-      image: "https://aircooffertelimburg.nl/logo.png",
-      telephone: "+31462021430",
-      url: "https://aircooffertelimburg.nl"
-    }
-  }
-}
-
-export function generateAggregateRatingSchema(): WithContext<AggregateRating> {
-  return {
-    "@context": "https://schema.org",
-    "@type": "AggregateRating",
-    itemReviewed: {
-      "@type": "LocalBusiness",
-      name: "Airco Offerte Limburg",
-      image: "https://aircooffertelimburg.nl/logo.png",
-      telephone: "+31462021430",
-      url: "https://aircooffertelimburg.nl"
-    },
-    ratingValue: "4.8",
-    reviewCount: "127",
-    bestRating: "5",
-    worstRating: "1"
   }
 }
