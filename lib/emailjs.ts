@@ -2,7 +2,7 @@ import emailjs from '@emailjs/browser';
 
 // Initialize EmailJS with your public key
 emailjs.init({
-  publicKey: "JOVuOJTC7ReYFRkQ_",
+  publicKey: "sjJ8kK6U9wFjY0zX9",
 });
 
 // EmailJS service and template IDs
