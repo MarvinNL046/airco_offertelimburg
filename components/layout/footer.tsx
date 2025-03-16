@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { AirVent, Mail, MapPin, Phone } from "lucide-react"
 
@@ -25,6 +27,17 @@ export function Footer() {
             <p className="mt-4 text-sm text-blue-200">
               Professionele airconditioning services in heel Limburg. Erkend en gecertificeerd.
             </p>
+            <div className="mt-4 flex items-center space-x-2 text-sm">
+              <span className="text-blue-200">Hoofdwebsite:</span>
+              <Link 
+                href="https://staycoolairco.nl" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="font-medium text-white hover:text-blue-200 underline"
+              >
+                staycoolairco.nl
+              </Link>
+            </div>
           </div>
 
           <div>

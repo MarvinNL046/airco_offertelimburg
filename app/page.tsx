@@ -5,6 +5,7 @@ import { ServicesSection } from "@/components/sections/services-section"
 import { TestimonialsSection } from "@/components/sections/testimonials"
 import { CTASection } from "@/components/sections/cta-section"
 import { CTABanner } from "@/components/sections/cta-banner"
+import { CompanyVideoSection } from "@/components/sections/company-video"
 import { generateOrganizationSchema } from "@/lib/schema"
 import Script from "next/script"
 
@@ -32,6 +33,7 @@ export default function HomePage() {
         <HeroSection />
         <FeaturesSection />
         <ServicesSection />
+        <CompanyVideoSection />
         <TestimonialsSection />
         <CTASection />
         <CTABanner theme="dark" />
