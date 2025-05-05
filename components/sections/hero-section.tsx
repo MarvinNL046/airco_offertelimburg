@@ -1,12 +1,26 @@
 "use client"
 
+import { useEffect, useRef } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ContactForm } from "@/components/forms/contact-form"
 import { Phone } from "lucide-react"
+import { markAsLCP, prefetchCriticalPaths } from "@/lib/performance"
 
 export function HeroSection() {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  
+  useEffect(() => {
+    // Optimize the LCP element
+    if (headingRef.current) {
+      markAsLCP(headingRef.current);
+    }
+    
+    // Prefetch critical navigation paths
+    prefetchCriticalPaths();
+  }, []);
+  
   return (
     <section 
       className="relative overflow-hidden bg-gradient-to-br from-blue-600 to-blue-800 py-20 text-white"
@@ -17,11 +31,14 @@ export function HeroSection() {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-8">
           <div className="flex flex-col justify-center">
             <h1 
+              ref={headingRef}
               id="hero-heading" 
               className="text-4xl font-bold tracking-tight sm:text-6xl"
               tabIndex={-1}
+              style={{ contentVisibility: "auto" }}
+              data-lcp="true"
             >
-              Professionele Airconditioning in Limburg
+              Klimaatbeheersing & Airco in Limburg
             </h1>
             <p className="mt-6 text-xl text-blue-100">
               Geniet van optimaal klimaatcomfort het hele jaar door. 

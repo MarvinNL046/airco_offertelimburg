@@ -4,10 +4,10 @@ export function generateOrganizationSchema(): WithContext<Organization> {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Airco Offerte Limburg",
+    name: "Klimaatbeheersing & Airco Limburg",
     url: "https://aircooffertelimburg.nl",
     logo: "https://aircooffertelimburg.nl/logo.png",
-    description: "Professionele airconditioning services in Limburg",
+    description: "Dé specialist in klimaatbeheersing en airco in Limburg. Installatie, onderhoud en reparatie voor woningen en bedrijven.",
     address: {
       "@type": "PostalAddress",
       addressRegion: "Limburg",
@@ -42,7 +42,7 @@ export function generateServiceSchema(service: {
     description: service.description,
     provider: {
       "@type": "Organization",
-      name: "Airco Offerte Limburg",
+      name: "Klimaatbeheersing & Airco Limburg",
     },
     areaServed: {
       "@type": "State",
@@ -63,8 +63,8 @@ export function generateLocalBusinessSchema(city: string): WithContext<LocalBusi
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    name: `Airco Offerte Limburg - ${city}`,
-    description: `Professionele airconditioning installatie en onderhoud in ${city}. Erkend en gecertificeerd installateur.`,
+    name: `Klimaatbeheersing & Airco Limburg - ${city}`,
+    description: `Professionele klimaatbeheersing en airconditioning installatie in ${city}. LAAGSTE prijsgarantie. Erkend en gecertificeerd installateur.`,
     url: `https://aircooffertelimburg.nl/steden/${city.toLowerCase()}`,
     telephone: "+31462021430",
     email: "info@staycoolairco.nl",

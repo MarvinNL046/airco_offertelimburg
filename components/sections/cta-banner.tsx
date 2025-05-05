@@ -20,7 +20,7 @@ export function CTABanner({ theme = "light" }: CTABannerProps) {
       <div className="container">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className={`${textColor} text-sm font-medium`}>
-            <span className="hidden sm:inline">❄️</span> Laat deze winter nog uw airco installeren en geniet van een korting tot wel € 250,-!
+            <span className="hidden sm:inline">🌷</span> Laat deze lente uw airco installeren en wees voorbereid op de zomer met een korting tot wel € 250,-!
           </p>
           <div className="flex flex-wrap gap-2">
             <Button size="sm" variant="outline" asChild>

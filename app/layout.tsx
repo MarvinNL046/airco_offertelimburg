@@ -17,7 +17,7 @@ export const metadata = {
     default: 'Airco Specialist Limburg | Gratis Offerte Binnen 24 Uur ✓',
     template: '%s | Airco Offerte Limburg'
   },
-  description: 'Dé airco specialist in Limburg! ✓ Gratis offerte ✓ Erkend installateur ✓ Alle topmerken ✓ Binnen 24 uur reactie ✓ Beste prijs-kwaliteit ✓ 5 jaar garantie. Bel nu: 046 202 1430',
+  description: 'Dé airco specialist in Limburg! ✓ Gratis offerte ✓ Erkend installateur ✓ Alle topmerken ✓ Binnen 24 uur reactie ✓ Beste prijs-kwaliteit. Bel nu: 046 202 1430',
   keywords: [
     // Primaire zoektermen
     'airco offerte limburg',
@@ -87,7 +87,7 @@ export const metadata = {
     url: '/',
     siteName: 'Airco Offerte Limburg',
     title: 'Airco Specialist Limburg | Gratis Offerte Binnen 24 Uur ✓',
-    description: 'Dé airco specialist in Limburg! ✓ Gratis offerte ✓ Erkend installateur ✓ Alle topmerken ✓ Binnen 24 uur reactie ✓ Beste prijs-kwaliteit',
+    description: 'Dé airco specialist in Limburg! ✓ Gratis offerte ✓ Erkend installateur ✓ Alle topmerken ✓ Binnen 24 uur reactie ✓ Beste prijs-kwaliteit. Bel nu: 046 202 1430',
     images: [
       {
         url: '/opengraph-image',
@@ -100,7 +100,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Airco Specialist Limburg | Gratis Offerte Binnen 24 Uur ✓',
-    description: 'Dé airco specialist in Limburg! ✓ Gratis offerte ✓ Erkend installateur ✓ Alle topmerken ✓ Binnen 24 uur reactie',
+    description: 'Dé airco specialist in Limburg! ✓ Gratis offerte ✓ Erkend installateur ✓ Alle topmerken ✓ Binnen 24 uur reactie ✓ Beste prijs-kwaliteit',
     images: ['/opengraph-image'],
     creator: '@aircooffertelimburg',
     site: '@aircooffertelimburg'
@@ -137,7 +137,30 @@ export default function RootLayout({
       suppressHydrationWarning
       className="scroll-smooth antialiased"
     >
-      <head />
+      <head>
+        {/* Add font display optimization */}
+        <link 
+          rel="preconnect" 
+          href="https://fonts.googleapis.com" 
+          crossOrigin="anonymous" 
+        />
+        <link 
+          rel="preconnect" 
+          href="https://fonts.gstatic.com" 
+          crossOrigin="anonymous" 
+        />
+        
+        {/* Preload LCP elements */}
+        <link 
+          rel="preload" 
+          as="style" 
+          href="/globals.css" 
+        />
+        
+        {/* Browser Hints for optimization */}
+        <meta name="theme-color" content="#1e40af" />
+        <meta httpEquiv="X-DNS-Prefetch-Control" content="on" />
+      </head>
       <body 
         className={`${inter.className} min-h-screen flex flex-col`}
         suppressHydrationWarning
