@@ -173,7 +173,7 @@ export function generateProductSchema(product: {
   image?: string[];
   offers?: {
     price: string;
-    availability: string;
+    availability?: string;
   };
 }): WithContext<Product> {
   return {
@@ -190,7 +190,7 @@ export function generateProductSchema(product: {
       "@type": "Offer",
       priceCurrency: "EUR",
       price: product.offers.price,
-      availability: product.offers.availability || "https://schema.org/InStock",
+      availability: (product.offers.availability || "https://schema.org/InStock") as any,
       seller: {
         "@type": "Organization",
         name: "Klimaatbeheersing & Airco Limburg",
