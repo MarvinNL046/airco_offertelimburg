@@ -1,4 +1,5 @@
-import { Card } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { History, Lightbulb, Leaf } from "lucide-react"
 
 interface BrandInfoProps {
   brand: {
@@ -11,26 +12,41 @@ export function BrandInfo({ brand }: BrandInfoProps) {
   const brandInfo = getBrandInfo(brand.name)
 
   return (
-    <Card className="p-6">
-      <h2 className="text-2xl font-semibold mb-4">Over {brand.name}</h2>
-      <p className="text-muted-foreground mb-6">{brand.description}</p>
-      
-      <div className="space-y-4">
-        <div>
-          <h3 className="font-semibold mb-2">Geschiedenis</h3>
-          <p className="text-muted-foreground">{brandInfo.history}</p>
-        </div>
+    <Card className="overflow-hidden">
+      <CardHeader className="bg-gradient-to-br from-blue-50 to-blue-100">
+        <CardTitle className="text-2xl flex items-center gap-2">
+          Over {brand.name}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="pt-6">
+        <p className="text-muted-foreground mb-6">{brand.description}</p>
         
-        <div>
-          <h3 className="font-semibold mb-2">Innovatie</h3>
-          <p className="text-muted-foreground">{brandInfo.innovation}</p>
-        </div>
+        <div className="space-y-6">
+          <div className="border-l-4 border-blue-500 pl-4">
+            <h3 className="font-semibold mb-2 flex items-center gap-2">
+              <History className="h-4 w-4 text-blue-600" />
+              Geschiedenis
+            </h3>
+            <p className="text-muted-foreground text-sm">{brandInfo.history}</p>
+          </div>
+          
+          <div className="border-l-4 border-orange-500 pl-4">
+            <h3 className="font-semibold mb-2 flex items-center gap-2">
+              <Lightbulb className="h-4 w-4 text-orange-600" />
+              Innovatie
+            </h3>
+            <p className="text-muted-foreground text-sm">{brandInfo.innovation}</p>
+          </div>
 
-        <div>
-          <h3 className="font-semibold mb-2">Duurzaamheid</h3>
-          <p className="text-muted-foreground">{brandInfo.sustainability}</p>
+          <div className="border-l-4 border-green-500 pl-4">
+            <h3 className="font-semibold mb-2 flex items-center gap-2">
+              <Leaf className="h-4 w-4 text-green-600" />
+              Duurzaamheid
+            </h3>
+            <p className="text-muted-foreground text-sm">{brandInfo.sustainability}</p>
+          </div>
         </div>
-      </div>
+      </CardContent>
     </Card>
   )
 }

@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google"
+import { Inter, Poppins } from "next/font/google"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { Toaster } from "@/components/ui/sonner"
@@ -9,15 +9,24 @@ const inter = Inter({
   subsets: ["latin"],
   display: 'swap',
   preload: true,
+  variable: '--font-inter',
+})
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ['300', '400', '500', '600', '700'],
+  display: 'swap',
+  preload: true,
+  variable: '--font-poppins',
 })
 
 export const metadata = {
   metadataBase: new URL('https://aircooffertelimburg.nl'),
   title: {
-    default: 'Airco Specialist Limburg | Gratis Offerte Binnen 24 Uur ✓',
-    template: '%s | Airco Offerte Limburg'
+    default: 'Airco Nodig? 🌡️ Direct KOEL in Limburg | Nu -15% Korting',
+    template: '%s'
   },
-  description: 'Dé airco specialist in Limburg! ✓ Gratis offerte ✓ Erkend installateur ✓ Alle topmerken ✓ Binnen 24 uur reactie ✓ Beste prijs-kwaliteit. Bel nu: 046 202 1430',
+  description: '⚡ VANDAAG geïnstalleerd mogelijk! 500+ airco\'s in Maastricht, Heerlen & Sittard ✓ Gratis advies aan huis ✓ Eerlijke prijzen ✓ Bel NU: 046 202 1430',
   keywords: [
     // Primaire zoektermen
     'airco offerte limburg',
@@ -162,7 +171,7 @@ export default function RootLayout({
         <meta httpEquiv="X-DNS-Prefetch-Control" content="on" />
       </head>
       <body 
-        className={`${inter.className} min-h-screen flex flex-col`}
+        className={`${inter.variable} ${poppins.variable} font-sans min-h-screen flex flex-col`}
         suppressHydrationWarning
       >
         <ThemeProvider

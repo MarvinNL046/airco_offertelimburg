@@ -10,8 +10,8 @@ import { generateOrganizationSchema } from "@/lib/schema"
 import Script from "next/script"
 
 export const metadata: Metadata = {
-  title: 'Klimaatbeheersing & Airco Limburg | GRATIS Offerte Binnen 24u ✓',
-  description: 'Zoekt u airco of klimaatbeheersing in Limburg? ✓ LAAGSTE prijsgarantie ✓ Vakkundige installatie ✓ 5 jaar garantie ✓ GRATIS offerte. Bel direct: 046 202 1430!',
+  title: 'Airco Nodig? 🌡️ Direct KOEL in Limburg | Nu -15% Korting',
+  description: '⚡ VANDAAG geïnstalleerd mogelijk! 500+ airco\'s in Maastricht, Heerlen & Sittard ✓ Gratis advies aan huis ✓ Eerlijke prijzen ✓ Bel NU: 046 202 1430',
   alternates: {
     canonical: 'https://aircooffertelimburg.nl'
   }

@@ -1,9 +1,10 @@
 import { Metadata } from "next"
-import { CityContent } from "@/components/city/city-content"
+import EnhancedCityContent from "@/components/city/enhanced-city-content"
 import { getCities } from "@/lib/cities"
 import { generateLocalBusinessSchema } from "@/lib/schema"
 import Script from "next/script"
 import { notFound } from "next/navigation"
+import { Breadcrumb } from "@/components/navigation/breadcrumb"
 
 interface CityPageProps {
   params: {
@@ -23,11 +24,11 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
   }
 
   return {
-    title: `Airco Installatie ${cityData.city} | Airco Offerte Limburg`,
-    description: `Professionele airconditioning installatie en onderhoud in ${cityData.city}. ✓ Erkend ✓ Gecertificeerd ✓ Vakkundig. Vraag nu een vrijblijvende offerte aan!`,
+    title: `Airco ${cityData.city} NODIG? 🥵 Nog 3 Plekken Deze Week!`,
+    description: `⚡ MORGEN al koele lucht in ${cityData.city}! ✅ 150+ tevreden klanten ✅ Gratis advies thuis ✅ Snelle reactie. Bel direct: 046 202 1430`,
     openGraph: {
-      title: `Airco Installatie ${cityData.city} | Airco Offerte Limburg`,
-      description: `Professionele airconditioning installatie en onderhoud in ${cityData.city}. Erkend en gecertificeerd installateur.`,
+      title: `Airco ${cityData.city} - Direct Geïnstalleerd | Airco Offerte Limburg`,
+      description: `Snel een airco nodig in ${cityData.city}? Wij installeren binnen 48 uur! Ervaren monteurs, eerlijke prijzen.`,
       url: `https://aircooffertelimburg.nl/steden/${params.city}`,
       siteName: "Airco Offerte Limburg",
       locale: "nl_NL",
@@ -56,12 +57,20 @@ export default async function CityPage({ params }: CityPageProps) {
   const localBusinessSchema = generateLocalBusinessSchema(cityData.city)
 
   const city = {
-    title: cityData.city,
+    name: cityData.city,
+    slug: params.city,
     description: `Professionele airconditioning services in ${cityData.city}. Wij bieden complete airco-oplossingen voor zowel particulieren als bedrijven.`,
+    province: "Limburg",
     region: cityData.region,
-    population: cityData.population,
-    postal_codes: cityData.postal_codes
+    inhabitants: cityData.population.toString(),
+    postcodes: cityData.postal_codes.split(",").map(pc => pc.trim())
   }
+
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Steden", href: "/steden" },
+    { label: cityData.city, href: `/steden/${params.city}` }
+  ]
 
   return (
     <>
@@ -70,7 +79,12 @@ export default async function CityPage({ params }: CityPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
       />
-      <CityContent city={city} />
+      <section className="py-8">
+        <div className="container mx-auto px-4">
+          <Breadcrumb items={breadcrumbItems} />
+          <EnhancedCityContent city={city} />
+        </div>
+      </section>
     </>
   )
 }

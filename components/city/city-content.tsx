@@ -39,15 +39,15 @@ export function CityContent({ city }: CityContentProps) {
             <ul className="space-y-3">
               <li className="flex items-center gap-3">
                 <ThermometerSun className="h-5 w-5 text-blue-600" />
-                <span>Airco installatie vanaf €1299,-</span>
+                <span>Professionele airco installatie</span>
               </li>
               <li className="flex items-center gap-3">
                 <ThermometerSun className="h-5 w-5 text-blue-600" />
-                <span>Airco onderhoud vanaf €9,- p.m.</span>
+                <span>Onderhoudscontracten beschikbaar</span>
               </li>
               <li className="flex items-center gap-3">
                 <ThermometerSun className="h-5 w-5 text-blue-600" />
-                <span>Airco reparatie vanaf €129,-</span>
+                <span>Snelle reparatieservice</span>
               </li>
             </ul>
           </Card>
