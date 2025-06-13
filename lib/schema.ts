@@ -1,4 +1,4 @@
-import { Organization, WithContext, Service, LocalBusiness, BreadcrumbList, Article, FAQPage, Product, AggregateRating, Review, ImageObject } from "schema-dts"
+import { Organization, WithContext, Service, LocalBusiness, BreadcrumbList, Article, FAQPage, Product } from "schema-dts"
 
 export function generateOrganizationSchema(): WithContext<Organization> {
   return {

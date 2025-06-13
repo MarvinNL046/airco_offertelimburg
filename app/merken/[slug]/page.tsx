@@ -14,7 +14,7 @@ import { BrandTechnology } from "@/components/merken/brand-technology"
 import { getProductsByBrand } from "@/lib/product-catalog"
 import ProductGallery from "@/components/merken/product-gallery"
 import { Phone, Shield, Award, Zap } from "lucide-react"
-import { generateBreadcrumbSchema, generateProductSchema } from "@/lib/schema"
+import { generateBreadcrumbSchema } from "@/lib/schema"
 import Script from "next/script"
 
 interface BrandPageProps {
