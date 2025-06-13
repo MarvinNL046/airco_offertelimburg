@@ -1,7 +1,7 @@
 import { Metadata } from "next"
 import EnhancedCityContent from "@/components/city/enhanced-city-content"
 import { getCities } from "@/lib/cities"
-import { generateLocalBusinessSchema } from "@/lib/schema"
+import { generateLocalBusinessSchema, generateBreadcrumbSchema } from "@/lib/schema"
 import Script from "next/script"
 import { notFound } from "next/navigation"
 import { Breadcrumb } from "@/components/navigation/breadcrumb"
@@ -55,6 +55,12 @@ export default async function CityPage({ params }: CityPageProps) {
   }
 
   const localBusinessSchema = generateLocalBusinessSchema(cityData.city)
+  
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", item: "/" },
+    { name: "Steden", item: "/steden" },
+    { name: cityData.city, item: `/steden/${params.city}` }
+  ])
 
   const city = {
     name: cityData.city,
@@ -78,6 +84,11 @@ export default async function CityPage({ params }: CityPageProps) {
         id="local-business-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <section className="py-8">
         <div className="container mx-auto px-4">

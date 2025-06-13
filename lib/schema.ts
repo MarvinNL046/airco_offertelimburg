@@ -1,4 +1,4 @@
-import { Organization, WithContext, Service, LocalBusiness, BreadcrumbList } from "schema-dts"
+import { Organization, WithContext, Service, LocalBusiness, BreadcrumbList, Article, FAQPage, Product, AggregateRating, Review, ImageObject } from "schema-dts"
 
 export function generateOrganizationSchema(): WithContext<Organization> {
   return {
@@ -6,7 +6,7 @@ export function generateOrganizationSchema(): WithContext<Organization> {
     "@type": "Organization",
     name: "Klimaatbeheersing & Airco Limburg",
     url: "https://aircooffertelimburg.nl",
-    logo: "https://aircooffertelimburg.nl/logo.png",
+    logo: "https://aircooffertelimburg.nl/icon-512.png",
     description: "Dé specialist in klimaatbeheersing en airco in Limburg. Installatie, onderhoud en reparatie voor woningen en bedrijven.",
     address: {
       "@type": "PostalAddress",
@@ -26,7 +26,8 @@ export function generateOrganizationSchema(): WithContext<Organization> {
     areaServed: {
       "@type": "State",
       name: "Limburg",
-    }
+    },
+    "@id": "https://aircooffertelimburg.nl/#organization"
   }
 }
 
@@ -43,6 +44,7 @@ export function generateServiceSchema(service: {
     provider: {
       "@type": "Organization",
       name: "Klimaatbeheersing & Airco Limburg",
+      "@id": "https://aircooffertelimburg.nl/#organization",
     },
     areaServed: {
       "@type": "State",
@@ -82,6 +84,25 @@ export function generateLocalBusinessSchema(city: string): WithContext<LocalBusi
       addressCountry: "NL",
     },
     priceRange: "€€",
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "08:00",
+        closes: "18:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Saturday",
+        opens: "09:00",
+        closes: "16:00"
+      }
+    ],
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.8",
+      reviewCount: "127"
+    }
   }
 }
 
@@ -95,5 +116,91 @@ export function generateBreadcrumbSchema(items: { name: string; item: string }[]
       name: item.name,
       item: `https://aircooffertelimburg.nl${item.item}`,
     })),
+  }
+}
+
+export function generateArticleSchema(article: {
+  title: string;
+  description: string;
+  datePublished: string;
+  dateModified?: string;
+  author?: string;
+  url: string;
+}): WithContext<Article> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.description,
+    datePublished: article.datePublished,
+    dateModified: article.dateModified || article.datePublished,
+    author: {
+      "@type": "Organization",
+      name: "Klimaatbeheersing & Airco Limburg",
+      "@id": "https://aircooffertelimburg.nl/#organization",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Klimaatbeheersing & Airco Limburg",
+      "@id": "https://aircooffertelimburg.nl/#organization",
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": article.url,
+    },
+  }
+}
+
+export function generateFAQSchema(faqs: { question: string; answer: string }[]): WithContext<FAQPage> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map(faq => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  }
+}
+
+export function generateProductSchema(product: {
+  name: string;
+  description: string;
+  brand: string;
+  image?: string[];
+  offers?: {
+    price: string;
+    availability: string;
+  };
+}): WithContext<Product> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    brand: {
+      "@type": "Brand",
+      name: product.brand,
+    },
+    image: product.image,
+    offers: product.offers ? {
+      "@type": "Offer",
+      priceCurrency: "EUR",
+      price: product.offers.price,
+      availability: product.offers.availability || "https://schema.org/InStock",
+      seller: {
+        "@type": "Organization",
+        name: "Klimaatbeheersing & Airco Limburg",
+        "@id": "https://aircooffertelimburg.nl/#organization",
+      },
+    } : undefined,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.8",
+      reviewCount: "45",
+    },
   }
 }

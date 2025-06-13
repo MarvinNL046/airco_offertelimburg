@@ -7,6 +7,8 @@ import {
 } from "@/components/ui/accordion"
 import { Breadcrumb } from "@/components/navigation/breadcrumb"
 import { CTAWithForm } from "@/components/sections/cta-with-form"
+import { generateFAQSchema, generateBreadcrumbSchema } from "@/lib/schema"
+import Script from "next/script"
 
 export const metadata: Metadata = {
   title: "Veelgestelde Vragen | Airco Offerte Limburg",
@@ -40,9 +42,25 @@ export default function FAQPage() {
   const breadcrumbItems = [
     { label: "FAQ", href: "/faq" }
   ];
+  
+  const faqSchema = generateFAQSchema(faqs)
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", item: "/" },
+    { name: "FAQ", item: "/faq" }
+  ])
 
   return (
     <>
+      <Script
+        id="faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <div className="container py-12">
         <Breadcrumb items={breadcrumbItems} />
         <h1 className="mb-8 text-4xl font-bold">Veelgestelde Vragen</h1>

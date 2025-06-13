@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"
 import { Breadcrumb } from "@/components/navigation/breadcrumb"
 import { CTAWithForm } from "@/components/sections/cta-with-form"
 import diensten from "@/data/diensten.json"
-import { generateServiceSchema } from "@/lib/structured-data"
+import { generateServiceSchema } from "@/lib/schema"
 import Script from "next/script"
 
 interface Props {

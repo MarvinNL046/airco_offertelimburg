@@ -14,6 +14,8 @@ import { BrandTechnology } from "@/components/merken/brand-technology"
 import { getProductsByBrand } from "@/lib/product-catalog"
 import ProductGallery from "@/components/merken/product-gallery"
 import { Phone, Shield, Award, Zap } from "lucide-react"
+import { generateBreadcrumbSchema, generateProductSchema } from "@/lib/schema"
+import Script from "next/script"
 
 interface BrandPageProps {
   params: {
@@ -56,9 +58,21 @@ export default function BrandPage({ params }: BrandPageProps) {
   ]
 
   const products = getProductsByBrand(brand.slug)
+  
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", item: "/" },
+    { name: "Merken", item: "/merken" },
+    { name: brand.name, item: `/merken/${brand.slug}` }
+  ])
 
   return (
-    <div className="animate-fade-in">
+    <>
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <div className="animate-fade-in">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-gray-50 to-white py-12">
         <div className="container">
@@ -194,5 +208,6 @@ export default function BrandPage({ params }: BrandPageProps) {
         </div>
       </section>
     </div>
+    </>
   )
 }
