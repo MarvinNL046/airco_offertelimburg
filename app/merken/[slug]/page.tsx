@@ -38,7 +38,7 @@ export function generateMetadata({ params }: BrandPageProps): Metadata {
   }
 
   return {
-    title: `${brand.name} Airco Kopen? ⚡ Reviews + Beste Prijs 2024`,
+    title: `${brand.name} Airco Kopen? ⚡ Reviews + Beste Prijs 2025`,
     description: `🔥 Alles over ${brand.name} airco's! ✅ Echte gebruikerservaringen ✅ Voor- en nadelen ✅ Beste modellen ✅ Laagste prijs garantie. Vergelijk NU!`,
   }
 }

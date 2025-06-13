@@ -2,7 +2,7 @@ export const blogPosts = [
   {
     slug: "voordelen-van-airconditioning",
     title: "De 7 Belangrijkste Voordelen van een Airconditioning",
-    date: "2024-02-20",
+    date: "2025-02-20",
     excerpt: "Ontdek waarom een airconditioning meer is dan alleen koeling en hoe het uw leefcomfort kan verbeteren.",
     content: `
       <p>Een airconditioning biedt veel meer voordelen dan alleen verkoeling tijdens warme zomerdagen. In dit artikel bespreken we de belangrijkste voordelen van een airconditioningsysteem.</p>
@@ -32,7 +32,7 @@ export const blogPosts = [
   {
     slug: "onderhoud-tips-airco",
     title: "Essentiële Onderhoudstips voor uw Airconditioning",
-    date: "2024-02-18",
+    date: "2025-02-18",
     excerpt: "Leer hoe u uw airconditioning in topconditie houdt met deze praktische onderhoudstips.",
     content: `
       <p>Regelmatig onderhoud van uw airconditioning is essentieel voor optimale prestaties en een lange levensduur. Hier zijn de belangrijkste onderhoudstips.</p>
@@ -50,7 +50,7 @@ export const blogPosts = [
   {
     slug: "airco-energiebesparing",
     title: "Maximale Energiebesparing met uw Airconditioning",
-    date: "2024-02-15",
+    date: "2025-02-15",
     excerpt: "Ontdek hoe u uw airconditioning energiezuinig gebruikt en bespaart op uw energierekening.",
     content: `
       <p>Met de juiste instellingen en gebruiksgewoonten kunt u significant besparen op uw energiekosten. Hier zijn de beste tips.</p>

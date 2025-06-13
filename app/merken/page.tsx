@@ -11,10 +11,10 @@ import Script from "next/script"
 import { Shield, Award, Leaf, Zap, ArrowRight } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "🏆 TOP 8 Airco Merken 2024 | Welke Past Bij U? (Test)",
+  title: "🏆 TOP 8 Airco Merken 2025 | Welke Past Bij U? (Test)",
   description: "⭐ Daikin vs Mitsubishi vs Samsung? Ontdek het BESTE merk voor UW situatie! ✅ Onafhankelijk advies ✅ Laagste prijsgarantie ✅ 10 jaar garantie mogelijk",
   keywords: [
-    "beste airco merk 2024",
+    "beste airco merk 2025",
     "airco merken vergelijken",
     "Daikin of Mitsubishi",
     "Samsung airco review",
