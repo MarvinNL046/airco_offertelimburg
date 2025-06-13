@@ -26,6 +26,9 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
   return {
     title: `Airco ${cityData.city} NODIG? 🥵 Nog 3 Plekken Deze Week!`,
     description: `⚡ MORGEN al koele lucht in ${cityData.city}! ✅ 150+ tevreden klanten ✅ Gratis advies thuis ✅ Snelle reactie. Bel direct: 046 202 1430`,
+    alternates: {
+      canonical: `https://aircooffertelimburg.nl/steden/${params.city}`,
+    },
     openGraph: {
       title: `Airco ${cityData.city} - Direct Geïnstalleerd | Airco Offerte Limburg`,
       description: `Snel een airco nodig in ${cityData.city}? Wij installeren binnen 48 uur! Ervaren monteurs, eerlijke prijzen.`,

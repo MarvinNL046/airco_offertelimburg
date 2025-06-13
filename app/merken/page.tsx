@@ -13,6 +13,9 @@ import { Shield, Award, Leaf, Zap, ArrowRight } from "lucide-react"
 export const metadata: Metadata = {
   title: "🏆 TOP 8 Airco Merken 2025 | Welke Past Bij U? (Test)",
   description: "⭐ Daikin vs Mitsubishi vs Samsung? Ontdek het BESTE merk voor UW situatie! ✅ Onafhankelijk advies ✅ Laagste prijsgarantie ✅ 10 jaar garantie mogelijk",
+  alternates: {
+    canonical: "https://aircooffertelimburg.nl/merken"
+  },
   keywords: [
     "beste airco merk 2025",
     "airco merken vergelijken",
