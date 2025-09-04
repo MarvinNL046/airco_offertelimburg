@@ -1,20 +1,19 @@
 import { Metadata } from "next"
-import { HeroSection } from "@/components/sections/hero-section"
-import { FeaturesSection } from "@/components/sections/features-section"
-import { ProductsSection } from "@/components/sections/products-section"
-import { ServicesSection } from "@/components/sections/services-section"
-import { TestimonialsSection } from "@/components/sections/testimonials"
-import { CTASection } from "@/components/sections/cta-section"
-import { CTABanner } from "@/components/sections/cta-banner"
-import { CompanyVideoSection } from "@/components/sections/company-video"
+import { HomePageV2 } from "@/components/pages/home-page-v2"
 import { generateOrganizationSchema } from "@/lib/schema"
 import Script from "next/script"
 
 export const metadata: Metadata = {
-  title: 'Airco Nodig? 🌡️ Direct KOEL in Limburg | Nu -15% Korting',
-  description: '⚡ VANDAAG geïnstalleerd mogelijk! 500+ airco\'s in Maastricht, Heerlen & Sittard ✓ Gratis advies aan huis ✓ Eerlijke prijzen ✓ Bel NU: 046 202 1430',
+  title: 'Airco Installatie Limburg | €100 Winterkorting | Direct Geïnstalleerd',
+  description: '⚡ #1 Airco specialist in Limburg ✓ 2847+ tevreden klanten ✓ Binnen 48u geïnstalleerd ✓ 5 jaar garantie ✓ A+++ airconditioners vanaf €1299 ✓ Bel: 046 202 1430',
   alternates: {
     canonical: 'https://aircooffertelimburg.nl'
+  },
+  openGraph: {
+    title: 'Airco Installatie Limburg | €100 Winterkorting',
+    description: 'Professionele airco installatie in heel Limburg. 5 jaar garantie, binnen 48 uur geïnstalleerd. Vraag nu gratis offerte aan!',
+    images: ['/images/og-image.jpg'],
+    type: 'website'
   }
 }
 
@@ -29,17 +28,7 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
       
-      <main>
-        <CTABanner theme="light" />
-        <HeroSection />
-        <FeaturesSection />
-        <ProductsSection />
-        <ServicesSection />
-        <CompanyVideoSection />
-        <TestimonialsSection />
-        <CTASection />
-        <CTABanner theme="dark" />
-      </main>
+      <HomePageV2 />
     </>
   )
 }

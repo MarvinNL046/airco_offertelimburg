@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ContactForm } from "@/components/forms/contact-form"
-import { Phone } from "lucide-react"
+import { Phone, Calendar } from "lucide-react"
 import { markAsLCP, prefetchCriticalPaths } from "@/lib/performance"
 
 export function HeroSection() {
@@ -48,6 +48,12 @@ export function HeroSection() {
               <Link href="/offerte">
                 <Button size="lg" className="bg-green-600 hover:bg-green-700">
                   Offerte Aanvragen
+                </Button>
+              </Link>
+              <Link href="/afspraak">
+                <Button size="lg" className="bg-orange-600 hover:bg-orange-700">
+                  <Calendar className="mr-2 h-5 w-5" />
+                  Plan een Afspraak
                 </Button>
               </Link>
               <Link href="tel:0462021430">

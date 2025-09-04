@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, Calendar } from "lucide-react";
 import Link from "next/link";
 import { ThemeToggle } from "./theme-toggle";
 
@@ -30,6 +30,12 @@ export default function Header() {
               Contact
             </Link>
             <ThemeToggle />
+            <Button asChild className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700">
+              <Link href="/afspraak">
+                <Calendar className="w-4 h-4" />
+                <span>Plan Afspraak</span>
+              </Link>
+            </Button>
             <Button className="flex items-center gap-2">
               <Phone className="w-4 h-4" />
               <span>Bel Nu</span>
@@ -74,6 +80,12 @@ export default function Header() {
               >
                 Contact
               </Link>
+              <Button asChild className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700">
+                <Link href="/afspraak">
+                  <Calendar className="w-4 h-4" />
+                  <span>Plan Afspraak</span>
+                </Link>
+              </Button>
               <Button className="flex items-center gap-2">
                 <Phone className="w-4 h-4" />
                 <span>Bel Nu</span>

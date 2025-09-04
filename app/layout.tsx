@@ -23,7 +23,7 @@ const poppins = Poppins({
 export const metadata = {
   metadataBase: new URL('https://aircooffertelimburg.nl'),
   title: {
-    default: 'Airco Nodig? 🌡️ Direct KOEL in Limburg | Nu -15% Korting',
+    default: 'Airco Nodig? 🌡️ Direct KOEL in Limburg | Nu €100 Korting',
     template: '%s'
   },
   description: '⚡ VANDAAG geïnstalleerd mogelijk! 500+ airco\'s in Maastricht, Heerlen & Sittard ✓ Gratis advies aan huis ✓ Eerlijke prijzen ✓ Bel NU: 046 202 1430',
