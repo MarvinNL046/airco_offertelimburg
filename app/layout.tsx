@@ -147,6 +147,17 @@ export default function RootLayout({
       className="scroll-smooth antialiased"
     >
       <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-LTP7GMHNBS" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-LTP7GMHNBS');
+            `,
+          }}
+        />
         {/* Add font display optimization */}
         <link 
           rel="preconnect" 
