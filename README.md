@@ -1,77 +1,61 @@
-# Airco Offerte Limburg
+# vind-base-template
 
-Modern Next.js website voor Airco Offerte Limburg, gebouwd met de nieuwste technologieën.
+Next.js 16 App Router leadgen template voor de vind-\* / \*-indebuurt domeinen.
+Elke site is een dunne wrapper rond deze template met een eigen
+`src/config/site.config.ts`.
 
-## Technologieën
+## Stack
 
-- Next.js 14
+- Next.js 16 (App Router, React 19, Server Components)
 - TypeScript
-- Tailwind CSS
-- Shadcn/ui
-- Email.js for contactform handeling
-- React Hook Form met Zod validatie
+- Tailwind v4 (CSS-first, via `@tailwindcss/postcss`)
+- Geen shadcn — utility-classes only, 14x clone moet licht zijn
 
-## Features
+## Architectuur
 
-- Modern, responsive design
-- SEO geoptimaliseerd
-- Performance geoptimaliseerd
-- Contact formulier met validatie
-- Prijs calculator
-- Blog systeem
-- Service pagina's
-- Stad-specifieke pagina's
+Leads lopen via de **LeadFlow marketplace wizard-flow** (SMS-OTP):
 
-## Installatie
-
-1. Clone de repository:
-
-```bash
-https://github.com/MarvinNL046/airco_offertelimburg/tree/main
+```
+Bezoeker → /                            (homepage + lead-form)
+         → POST /api/lead/start         (server proxy → wetryleadflow.com/api/intake/wizard/start)
+         → /aanvragen/verify?v=<token>  (SMS-code page)
+         → POST /api/lead/verify        (server proxy → .../wizard/verify)
+         → /aanvragen/bedankt
 ```
 
-2. Installeer dependencies:
+De **Bearer API-key blijft server-side** (env var `LEADFLOW_API_KEY`).
+De browser ziet alleen de eigen /api/lead/\* proxy routes.
 
-```bash
-cd airco-offerte-limburg
+## Aanpassen per domein
+
+Alleen `src/config/site.config.ts` hoeft aangepast te worden. Per domein:
+
+- `domain`, `siteName`, `primaryKeyword`
+- `metaTitle`, `metaDescription`, `h1`, `heroIntro`, `heroUsps`
+- `services`, `whyUsBullets`, `howItWorks`, `faq`, `ctaVariants`
+- `niche` (marketplace niche — zie `src/lib/site-config.ts` voor typing)
+- `accent` (brand kleur)
+- `privacyContactEmail`
+
+## Env vars
+
+Zie `.env.example`:
+
+```
+LEADFLOW_API_KEY=lmk_...            # Per-site key, scoped op 1 niche
+LEADFLOW_BASE_URL=https://wetryleadflow.com
+NEXT_PUBLIC_SITE_URL=https://vinddomain.nl
+```
+
+## Lokaal
+
+```
 npm install
-```
-
-3. Kopieer het `.env.example` bestand naar `.env` en vul de juiste waarden in:
-
-```bash
-cp .env.example .env
-```
-
-4. Start de development server:
-
-```bash
+cp .env.example .env.local          # vul de key in
 npm run dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in je browser.
+## Deploy
 
-## Deployment
-
-Dit project is geconfigureerd voor static export en kan worden gedeployed naar elk static hosting platform.
-
-### Build
-
-```bash
-npm run build
-```
-
-De statische export wordt gegenereerd in de `out` directory.
-
-## Environment Variables
-
-- `NEXT_PUBLIC_SITE_URL`: De publieke URL van de website
-- `NEXT_PUBLIC_GA_ID`: Google Analytics ID
-
-
-## Contact
-
-Voor vragen of ondersteuning, neem contact op via:
-
-- Email: info@staycoolairco.nl
-- Tel: 046 202 1430
+Elk domein is een eigen Vercel-project. Zie `docs/DEPLOYMENT.md` (wordt
+aangemaakt in Task #7) voor stap-voor-stap handoff.
