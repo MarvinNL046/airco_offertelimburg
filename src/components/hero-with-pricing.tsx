@@ -34,7 +34,7 @@ export function HeroWithPricing() {
             ))}
           </ul>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href="#aanvragen" className="accent-bg text-white font-medium px-5 py-3 rounded-md">
+            <a href="#aanvragen" className="shiny-btn accent-bg text-white font-medium px-5 py-3 rounded-md">
               {siteConfig.ctaVariants.primary}
             </a>
             <a href="#prijzen" className="border border-slate-300 text-slate-800 font-medium px-5 py-3 rounded-md hover:bg-slate-50">
